@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { username } from "better-auth/plugins";
 import { MongoClient } from "mongodb";
 
 const client = new MongoClient(process.env.AUTH_DB_URI);
@@ -9,6 +10,9 @@ const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
+  plugins: [
+    username() //for username based Sign-in
+  ],
   socialProviders: {
     google: {},
   },

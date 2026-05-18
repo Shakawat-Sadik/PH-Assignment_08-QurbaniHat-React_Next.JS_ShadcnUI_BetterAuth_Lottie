@@ -11,8 +11,6 @@ const AnimalsPage = async () => {
     return acc;
   }, {});
 
-  console.log(animalCount);
-
   const knownTypes = Object.keys(animalCount);
 
   console.log(knownTypes);
