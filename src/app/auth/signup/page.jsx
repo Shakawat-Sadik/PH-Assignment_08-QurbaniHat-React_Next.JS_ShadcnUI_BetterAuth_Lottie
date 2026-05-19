@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoaderFive } from "@/components/ui/loader";
 import { TextureButton } from "@/components/ui/texture-button";
 import {
   TextureCardContent,
@@ -13,22 +14,41 @@ import {
 } from "@/components/ui/texture-card";
 import { authClient } from "@/lib/auth-client";
 import { ArrowRightIcon, UserPlusIcon } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const SignUpPage = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const handleForm = async (e) => {
-        e.preventDefault();
-        const ct = new FormData(e.currentTarget);
-        const { email, name, username, password}= Object.fromEntries(ct);
-        const { data, error} = await authClient.signUp.email({
-            name: name,
-            email: email,
-            name: username,
-            password: password,
-            callbackURL: "/"
-        })
-        console.log(data, error)
-    }
+  const handleForm = async (e) => {
+    e.preventDefault();
+    const ct = new FormData(e.currentTarget);
+    const { email, name, username, password } = Object.fromEntries(ct);
+    const { data, error } = await authClient.signUp.email(
+      {
+        name: username || name,
+        email,
+        username,
+        password,
+        callbackURL: "/",
+      },
+      {
+        onRequest: () => {
+          setIsLoading(true);
+        },
+        onSuccess: () => {
+          setIsLoading(false);
+          router.push("/");
+        },
+        onError: (error) => {
+          setIsLoading(false);
+          console.error(error);
+        },
+      },
+    );
+    console.log(data, error);
+  };
 
   return (
     <div className="flex items-center justify-center py-4">
@@ -39,7 +59,10 @@ const SignUpPage = () => {
               <TextureCardStyled>
                 <TextureCardHeader className="flex flex-col gap-1 items-center justify-center p-4">
                   <div className="p-3 bg-background rounded-full mb-3">
-                    <UserPlusIcon size={32} className="h-7 w-7 stroke-neutral-200" />
+                    <UserPlusIcon
+                      size={32}
+                      className="h-7 w-7 stroke-neutral-200"
+                    />
                   </div>
                   <TextureCardTitle>Create your account</TextureCardTitle>
                   <p className="text-center">
@@ -98,17 +121,21 @@ const SignUpPage = () => {
                   </div>
                   <div className="text-center text-sm mb-4">or</div>
 
-                  <form id="signup" onSubmit={handleForm} className="flex flex-col gap-6">
+                  <form
+                    id="signup"
+                    onSubmit={handleForm}
+                    className="flex flex-col gap-6"
+                  >
                     <div className="flex flex-col gap-2">
                       {/* <div> */}
-                        <Label htmlFor="name">Name</Label>
-                        <Input
-                          id="name"
-                          type="name"
-                          name="name"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
+                      <Label htmlFor="name">Name</Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        name="name"
+                        required
+                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                      />
                       {/* </div> */}
                       {/* <div>
                         <Label htmlFor="last">Last Name</Label>
@@ -123,11 +150,21 @@ const SignUpPage = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
+                      <Label htmlFor="avatar">Avatar</Label>
+                      <Input
+                        id="avatar"
+                        type="file"
+                        name="avatar"
+                        accept="image/*"
+                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
                       <Label htmlFor="username">Username</Label>
                       <Input
                         id="username"
-                        type="username"
-                          name="username"
+                        type="text"
+                        name="username"
                         required
                         className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
                       />
@@ -137,7 +174,7 @@ const SignUpPage = () => {
                       <Input
                         id="email"
                         type="email"
-                          name="email"
+                        name="email"
                         required
                         className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
                       />
@@ -147,7 +184,7 @@ const SignUpPage = () => {
                       <Input
                         id="password"
                         type="password"
-                          name="password"
+                        name="password"
                         required
                         className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
                       />
@@ -156,11 +193,24 @@ const SignUpPage = () => {
                 </TextureCardContent>
                 <TextureSeparator />
                 <TextureCardFooter className="border-b rounded-b-sm">
-                  <TextureButton type="submit" form="signup" variant="accent" className="w-full">
-                    <div className="flex gap-1 items-center justify-center">
-                      Continue
-                      <ArrowRightIcon size={32} className="h-4 w-4 text-neutral-50 mt-[1px]"/>
-                    </div>
+                  <TextureButton
+                    type="submit"
+                    form="signup"
+                    variant="accent"
+                    className="w-full"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <LoaderFive text="Setting up your existence..." />
+                    ) : (
+                      <div className="flex gap-1 items-center justify-center">
+                        Continue
+                        <ArrowRightIcon
+                          size={32}
+                          className="h-4 w-4 text-neutral-50 mt-px"
+                        />
+                      </div>
+                    )}
                   </TextureButton>
                 </TextureCardFooter>
 
