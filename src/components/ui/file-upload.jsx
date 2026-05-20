@@ -68,12 +68,12 @@ export const FileUpload = ({
         </div>
         <div className="flex flex-col items-center justify-center">
           <p
-            className="relative z-20 font-sans text-base font-bold text-neutral-700 dark:text-neutral-300">
-            Upload file
+            className="relative z-20 font-bold text-neutral-700 dark:text-neutral-300">
+            Upload Your Avatar
           </p>
           <p
-            className="relative z-20 mt-2 font-sans text-base font-normal text-neutral-400 dark:text-neutral-400">
-            Drag or drop your files here or click to upload
+            className="relative z-20 mt-2 font-normal text-neutral-400 dark:text-neutral-400">
+            Drag and drop your files here or click to upload
           </p>
           <div className="relative mx-auto mt-10 w-full max-w-xl">
             {files.length > 0 &&
@@ -113,7 +113,7 @@ export const FileUpload = ({
                     </motion.p>
 
                     <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} layout>
-                      modified{" "}
+                      last modify date {" "}
                       {new Date(file.lastModified).toLocaleDateString()}
                     </motion.p>
                   </div>

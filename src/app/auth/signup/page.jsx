@@ -1,5 +1,6 @@
 "use client";
 
+import { FileUpload } from "@/components/ui/file-upload";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoaderFive } from "@/components/ui/loader";
@@ -24,14 +25,17 @@ const SignUpPage = () => {
   const handleForm = async (e) => {
     e.preventDefault();
     const ct = new FormData(e.currentTarget);
-    const { email, name, username, password } = Object.fromEntries(ct);
+    const { email, name, username, password, directImage, avatar } = Object.fromEntries(ct);
+    console.log(directImage);
+    console.log(avatar);
     const { data, error } = await authClient.signUp.email(
       {
-        name: username || name,
+        name,
         email,
         username,
         password,
-        callbackURL: "/",
+        image: avatar || "https://plus.unsplash.com/premium_vector-1727953895100-6f169fe15bc6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        callbackURL: "/auth/signin",
       },
       {
         onRequest: () => {
@@ -49,11 +53,16 @@ const SignUpPage = () => {
     );
     console.log(data, error);
   };
+  const [files, setFiles] = useState([]);
+  const handleFileUpload = (FailureResult) => {
+    setFiles(files);
+    console.log(files);
+  };
 
   return (
     <div className="flex items-center justify-center py-4">
       <div className="dark:bg-stone-950 h-full rounded-md">
-        <div className=" items-start justify-center gap-6 rounded-lg p-2 md:p-8 grid grid-cols-1 ">
+        <div className="items-start justify-center gap-6 rounded-lg p-2 md:p-8 grid grid-cols-1 ">
           <div className="col-span-1 grid items-start gap-6 lg:col-span-1">
             <div>
               <TextureCardStyled>
@@ -119,25 +128,30 @@ const SignUpPage = () => {
                       <span className="pl-2">Github</span>
                     </TextureButton> */}
                   </div>
-                  <div className="text-center text-sm mb-4">or</div>
+                  <div className="flex justify-around items-center gap-8 m-5">
+                      <hr className="border w-full" />
+                      <span className="flex text-center text-sm">Or</span>
+                      <hr className="border w-full" />
+                  </div>
 
                   <form
                     id="signup"
                     onSubmit={handleForm}
-                    className="flex flex-col gap-6"
+                    className="grid grid-cols-2 max-h-screen max-w-screen text-base gap-6"
                   >
-                    <div className="flex flex-col gap-2">
-                      {/* <div> */}
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        type="text"
-                        name="name"
-                        required
-                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                      />
-                      {/* </div> */}
-                      {/* <div>
+                    <div className="flex flex-col row-span-2 justify-center gap-6">
+                      <div className="flex flex-col items-center gap-2">
+                        {/* <div> */}
+                        <Label htmlFor="name" className="text-base">Name</Label>
+                        <Input
+                          id="name"
+                          type="text"
+                          name="name"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                        />
+                        {/* </div> */}
+                        {/* <div>
                         <Label htmlFor="last">Last Name</Label>
                         <Input
                           id="last"
@@ -147,67 +161,68 @@ const SignUpPage = () => {
                           className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
                         />
                       </div> */}
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="avatar">Avatar</Label>
-                      <Input
-                        id="avatar"
-                        type="file"
-                        name="avatar"
-                        accept="image/*"
-                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="username">Username</Label>
-                      <Input
-                        id="username"
-                        type="text"
-                        name="username"
-                        required
-                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                      />
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="username" className="text-base">Username</Label>
+                        <Input id="username"
+                          type="text"
+                          name="username"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="email" className="text-base">Email</Label>
+                        <Input 
                         id="email"
-                        type="email"
-                        name="email"
-                        required
-                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                      />
+                          type="email"
+                          name="email"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="password" className="text-base">Password</Label>
+                        <Input id="password"
+                          type="password"
+                          name="password"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                        />
+                      </div>
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="password">Password</Label>
+                    <div className="row-span-2 flex flex-col justify-center items-center gap-2">
+                      <Label htmlFor="avatar" className="text-base">Avatar</Label>
+                      <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
+                        <FileUpload name="directImage" onChange={handleFileUpload} />
+                      </div>
+                      <div className="flex text-sm gap-3"><span className="">Or</span><span className="rotate-3">|</span><span>Share avatar link</span></div>
                       <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        required
-                        className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                      />
+                          id="avatar"
+                          type="url"
+                          name="avatar"
+                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
+                        />
                     </div>
                   </form>
                 </TextureCardContent>
                 <TextureSeparator />
-                <TextureCardFooter className="border-b rounded-b-sm">
+                <TextureCardFooter className="flex items-center justify-center border-b rounded-b-sm">
                   <TextureButton
                     type="submit"
                     form="signup"
                     variant="accent"
-                    className="w-full"
+                    className="w-[50%]"
                     disabled={isLoading}
                   >
                     {isLoading ? (
                       <LoaderFive text="Setting up your existence..." />
                     ) : (
-                      <div className="flex gap-1 items-center justify-center">
-                        Continue
+                      <div className="flex gap-1 items-center justify-center text-xl font-bold">
+                        Sign Up
                         <ArrowRightIcon
                           size={32}
-                          className="h-4 w-4 text-neutral-50 mt-px"
+                          className="h-4 w-4 text-neutral-50 mb-0.5"
                         />
                       </div>
                     )}
@@ -218,8 +233,8 @@ const SignUpPage = () => {
                   <div className="flex flex-col items-center justify-center">
                     <div className="py-2 px-2">
                       <div className="text-center text-sm">
-                        Already have an account?{" "}
-                        <span className="text-primary">Sign in</span>
+                        Already have an account?
+                        <span className="text-primary"> Sign in</span>
                       </div>
                     </div>
                   </div>

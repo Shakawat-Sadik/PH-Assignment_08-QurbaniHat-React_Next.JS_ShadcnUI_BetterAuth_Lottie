@@ -64,11 +64,17 @@ Needs Approval
 ## MongoDB
 
 ```bash
-npm install mongodb
+pnpm add mongodb
+```
+## Cloudinary
+
+```bash
+pnpm i next-cloudinary
 ```
 
 ### API Endpoint
 
 [All together](https://api.npoint.io/8982ace3b4fd9eeb22fc)
 [Dynamically one](https://api.npoint.io/8982ace3b4fd9eeb22fc/[index])
+
 
