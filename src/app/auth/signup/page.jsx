@@ -22,20 +22,29 @@ import { useState } from "react";
 const SignUpPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-
+  const [files, setFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [isUploading, setIsUploading] = useState(false);
   const handleForm = async (e) => {
     e.preventDefault();
     const ct = new FormData(e.currentTarget);
-    const { email, name, username, password, directImage, avatar } = Object.fromEntries(ct);
-    console.log(directImage);
-    console.log(avatar);
+    const { email, name, username, password, avatar } = Object.fromEntries(ct);
+    let imageUrl = avatar;
+    try {
+      if (selectedFile) {
+        imageUrl = await uploadToCloudinary(selectedFile);
+      }
+    } catch (err) {
+      console.error('Cloudinary upload failed', err);
+    }
+
     const { data, error } = await authClient.signUp.email(
       {
         name,
         email,
         username,
         password,
-        image: avatar || "https://plus.unsplash.com/premium_vector-1727953895100-6f169fe15bc6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        image: imageUrl || "https://plus.unsplash.com/premium_vector-1727953895100-6f169fe15bc6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         callbackURL: "/auth/signin",
       },
       {
@@ -54,11 +63,41 @@ const SignUpPage = () => {
     );
     console.log(data, error);
   };
-  const [files, setFiles] = useState([]);
-  const handleFileUpload = (FailureResult) => {
-    setFiles(files);
-    console.log(files);
+
+  const handleFileUpload = (fileList) => {
+    // `FileUpload` may provide an array; take the first file for avatar
+    const file = Array.isArray(fileList) ? fileList[0] : fileList;
+    setFiles(fileList || []);
+    setSelectedFile(file || null);
+    console.log('selected file', file);
   };
+
+  async function uploadToCloudinary(file) {
+    if (!file) throw new Error('No file provided');
+    setIsUploading(true);
+    try {
+      const signRes = await fetch('/api/cloudinary/sign', { method: 'POST' });
+      if (!signRes.ok) throw new Error('Failed to get signature');
+      const { cloudName, apiKey, timestamp, signature, folder } = await signRes.json();
+
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('api_key', apiKey);
+      formData.append('timestamp', String(timestamp));
+      formData.append('signature', signature);
+      formData.append('folder', folder);
+
+      const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: 'POST',
+        body: formData,
+      });
+      const uploadJson = await uploadRes.json();
+      if (!uploadRes.ok) throw new Error(uploadJson.error?.message || 'Upload failed');
+      return uploadJson.secure_url;
+    } finally {
+      setIsUploading(false);
+    }
+  }
 
   return (
     <div className="flex items-center justify-center py-4">
@@ -214,7 +253,7 @@ const SignUpPage = () => {
                     form="signup"
                     variant="accent"
                     className="w-[50%]"
-                    disabled={isLoading}
+                    disabled={isLoading || isUploading}
                   >
                     {isLoading ? (
                       <LoaderFive text="Setting up your existence..." />

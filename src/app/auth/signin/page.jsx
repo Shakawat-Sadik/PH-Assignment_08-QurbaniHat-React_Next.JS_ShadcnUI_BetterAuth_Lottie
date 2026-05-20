@@ -53,7 +53,8 @@ const SignInPage = () => {
     console.log(data, error);
   };
 
-  const handleGauth = async () => {
+  const handleGLogin = async (e) => {
+    console.log(e.currentTarget); //Gotta learn useRef then I'll get back and create an overlay stating `Logging you in...` if used credential, `Googling you in...` if used Google sign in.
     const data = await authClient.signIn.social(
       {
         provider: "google",
@@ -62,6 +63,7 @@ const SignInPage = () => {
       {
         onRequest: () => {
           setIsLoading(true);
+        //   div.absolute.bg-background
         },
         onSuccess: () => {
           setIsLoading(false);
@@ -98,7 +100,7 @@ const SignInPage = () => {
                 <TextureCardContent>
                   <div className="flex justify-center gap-2 mb-4">
                     <TextureButton
-                      onClick={handleGauth}
+                      onClick={handleGLogin}
                       variant="icon"
                       className=""
                     >
