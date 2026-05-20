@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/texture-card";
 import { authClient } from "@/lib/auth-client";
 import { ArrowRightIcon, UserPlusIcon } from "@phosphor-icons/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -234,7 +235,7 @@ const SignUpPage = () => {
                     <div className="py-2 px-2">
                       <div className="text-center text-sm">
                         Already have an account?
-                        <span className="text-primary"> Sign in</span>
+                        <Link href="/auth/signin" className="text-primary"> Sign in</Link>
                       </div>
                     </div>
                   </div>
