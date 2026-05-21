@@ -9,14 +9,15 @@ export const DistortedGlass = ({
     <>
       <div
         className={cn(
-          "relative hidden h-[8vw] w-90 overflow-hidden rounded-b-2xl lg:w-150 xl:block xl:w-full",
+          "relative hidden h-12.5 w-90 overflow-hidden rounded-b-2xl lg:w-150  xl:block xl:w-full",
           className
         )}>
         <div
-          className="pointer-events-none absolute bottom-0 z-10 size-full overflow-hidden rounded-b-2xl  border border-[#f5f5f51a]">
-          <div className="glass-effect bg-(--glass-effect-bg) size-full"></div>
+          className="pointer-events-none absolute bottom-0  z-10 size-full overflow-hidden rounded-b-2xl  border border-[#f5f5f51a]">
+          <div className="glass-effect size-full"></div>
         </div>
         <svg>
+          <title>Distorted Glass</title>
           <defs>
             <filter id="fractal-noise-glass">
               <feTurbulence

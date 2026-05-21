@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { DistortedGlass } from "@/components/ui/distorted-glass";
 import { FileUpload } from "@/components/ui/file-upload";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -63,7 +65,7 @@ const SignInPage = () => {
       {
         onRequest: () => {
           setIsLoading(true);
-        //   div.absolute.bg-background
+          //   div.absolute.bg-background
         },
         onSuccess: () => {
           setIsLoading(false);
@@ -79,6 +81,25 @@ const SignInPage = () => {
 
   return (
     <div className="flex items-center justify-center py-4">
+      <Button
+        onClick={() => {
+          setIsLoading(!isLoading);
+        }}
+        className="absolute top-3 z-100"
+      >
+        isLoading
+      </Button>
+      {
+        isLoading === true && (
+            <div className="absolute top-0 right-0 flex justify-center items-center border-8 size-full">
+                <div className="z-50 h-full w-full glass-effect bg-(--glass-effect-bg) size-full text-2xl">
+                </div>
+                <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none text-3xl">
+                    <LoaderFive text="Logging in shortly..." />
+                </div>
+            </div>
+        )
+      }
       <div className=" dark:bg-stone-950 h-full rounded-md w-[50%]">
         <div className="items-start justify-center gap-6 rounded-lg p-2 md:p-8 grid grid-cols-1 ">
           <div className="col-span-1 grid items-start gap-6 lg:col-span-2">
@@ -88,7 +109,7 @@ const SignInPage = () => {
                   <div className="p-3 bg-background rounded-full mb-3">
                     <UserPlusIcon
                       size={32}
-                      className="h-7 w-7 stroke-neutral-200"
+                      className="h-7 w-7 stroke-background"
                     />
                   </div>
                   <TextureCardTitle>Sign into your account</TextureCardTitle>
@@ -130,11 +151,7 @@ const SignInPage = () => {
                           fill="#EB4335"
                         />
                       </svg>
-                      {isLoading ? (
-                        <LoaderFive text="Logging you in..." />
-                      ) : (
-                        <span className="pl-2">Google</span>
-                      )}
+                      <span className="pl-2">Google</span>
                     </TextureButton>
                   </div>
                   <div className="flex justify-around items-center gap-8 m-5">
@@ -185,17 +202,13 @@ const SignInPage = () => {
                     className="w-[50%]"
                     disabled={isLoading}
                   >
-                    {isLoading ? (
-                      <LoaderFive text="Logging you in..." />
-                    ) : (
                       <div className="flex gap-1 items-center justify-center text-xl font-bold">
-                        Sign In
+                        Log In
                         <ArrowRightIcon
                           size={32}
                           className="h-4 w-4 text-neutral-50 mb-0.5"
                         />
                       </div>
-                    )}
                   </TextureButton>
                 </TextureCardFooter>
 

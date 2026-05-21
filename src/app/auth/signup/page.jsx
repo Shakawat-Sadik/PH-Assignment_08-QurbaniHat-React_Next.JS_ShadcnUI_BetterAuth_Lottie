@@ -1,10 +1,5 @@
 "use client";
 
-import { FileUpload } from "@/components/ui/file-upload";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { LoaderFive } from "@/components/ui/loader";
-import { TextureButton } from "@/components/ui/texture-button";
 import {
   TextureCardContent,
   TextureCardFooter,
@@ -13,11 +8,17 @@ import {
   TextureCardTitle,
   TextureSeparator,
 } from "@/components/ui/texture-card";
+import { FileUpload } from "@/components/ui/file-upload";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { LoaderFive } from "@/components/ui/loader";
+import { TextureButton } from "@/components/ui/texture-button";
 import { authClient } from "@/lib/auth-client";
 import { ArrowRightIcon, UserPlusIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { DistortedGlass } from "@/components/ui/distorted-glass";
 
 const SignUpPage = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const SignUpPage = () => {
   const [files, setFiles] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+
   const handleForm = async (e) => {
     e.preventDefault();
     const ct = new FormData(e.currentTarget);
@@ -35,7 +37,7 @@ const SignUpPage = () => {
         imageUrl = await uploadToCloudinary(selectedFile);
       }
     } catch (err) {
-      console.error('Cloudinary upload failed', err);
+      console.error("Cloudinary upload failed", err);
     }
 
     const { data, error } = await authClient.signUp.email(
@@ -44,7 +46,9 @@ const SignUpPage = () => {
         email,
         username,
         password,
-        image: imageUrl || "https://plus.unsplash.com/premium_vector-1727953895100-6f169fe15bc6?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        image:
+          imageUrl ||
+          "https://res.cloudinary.com/sadik-store/image/upload/v1779291140/avatar_my9zov.png",
         callbackURL: "/auth/signin",
       },
       {
@@ -61,7 +65,8 @@ const SignUpPage = () => {
         },
       },
     );
-    console.log(data, error);
+    console.log(data.user, error);
+    !error && setSignedUp(true);
   };
 
   const handleFileUpload = (fileList) => {
@@ -69,30 +74,35 @@ const SignUpPage = () => {
     const file = Array.isArray(fileList) ? fileList[0] : fileList;
     setFiles(fileList || []);
     setSelectedFile(file || null);
-    console.log('selected file', file);
+    console.log("selected file", file);
   };
 
   async function uploadToCloudinary(file) {
-    if (!file) throw new Error('No file provided');
+    if (!file) throw new Error("No file provided");
     setIsUploading(true);
     try {
-      const signRes = await fetch('/api/cloudinary/sign', { method: 'POST' });
-      if (!signRes.ok) throw new Error('Failed to get signature');
-      const { cloudName, apiKey, timestamp, signature, folder } = await signRes.json();
+      const signRes = await fetch("/api/cloudinary/sign", { method: "POST" });
+      if (!signRes.ok) throw new Error("Failed to get signature");
+      const { cloudName, apiKey, timestamp, signature, folder } =
+        await signRes.json();
 
       const formData = new FormData();
-      formData.append('file', file);
-      formData.append('api_key', apiKey);
-      formData.append('timestamp', String(timestamp));
-      formData.append('signature', signature);
-      formData.append('folder', folder);
+      formData.append("file", file);
+      formData.append("api_key", apiKey);
+      formData.append("timestamp", String(timestamp));
+      formData.append("signature", signature);
+      formData.append("folder", folder);
 
-      const uploadRes = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: 'POST',
-        body: formData,
-      });
+      const uploadRes = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
       const uploadJson = await uploadRes.json();
-      if (!uploadRes.ok) throw new Error(uploadJson.error?.message || 'Upload failed');
+      if (!uploadRes.ok)
+        throw new Error(uploadJson.error?.message || "Upload failed");
       return uploadJson.secure_url;
     } finally {
       setIsUploading(false);
@@ -100,8 +110,16 @@ const SignUpPage = () => {
   }
 
   return (
-    <div className="flex items-center justify-center py-4">
-      <div className="dark:bg-stone-950 h-full rounded-md">
+    <div className="relative flex items-center justify-center -mt-18 h-full flex-1">
+      {
+        isLoading === true && (
+          <div className="z-50 h-full w-full glass-effect bg-(--glass-effect-bg) size-full text-2xl">
+            <LoaderFive text="We're being introduced to you..." />
+          </div>
+        )
+      }
+
+      <div className="dark:bg-stone-950 rounded-md">
         <div className="items-start justify-center gap-6 rounded-lg p-2 md:p-8 grid grid-cols-1 ">
           <div className="col-span-1 grid items-start gap-6 lg:col-span-1">
             <div>
@@ -110,19 +128,115 @@ const SignUpPage = () => {
                   <div className="p-3 bg-background rounded-full mb-3">
                     <UserPlusIcon
                       size={32}
-                      className="h-7 w-7 stroke-neutral-200"
+                      className="h-7 w-7 stroke-background"
                     />
                   </div>
                   <TextureCardTitle>Create your account</TextureCardTitle>
-                  <p className="text-center">
-                    Welcome! Please fill in the details to get started.
-                  </p>
                 </TextureCardHeader>
                 <TextureSeparator />
                 <TextureCardContent>
+
+                  <form
+                    id="signup"
+                    onSubmit={handleForm}
+                    className="grid grid-cols-2 max-h-screen max-w-screen text-base text-[#02343F] gap-6"
+                  >
+                    <div className="flex flex-col row-span-2 justify-center gap-6">
+                      <div className="flex flex-col items-center gap-2">
+                        {/* <div> */}
+                        <Label htmlFor="name" className="text-base text-[#02343F]">
+                          Name
+                        </Label>
+                        <Input
+                          id="name"
+                          type="text"
+                          name="name"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500"
+                        />
+                        {/* </div> */}
+                        {/* <div>
+                        <Label htmlFor="last">Last Name</Label>
+                        <Input
+                          id="last"
+                          type="last"
+                          name="last"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500"
+                        />
+                      </div> */}
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="username" className="text-base text-[#02343F]">
+                          Username
+                        </Label>
+                        <Input
+                          id="username"
+                          type="text"
+                          name="username"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="email" className="text-base text-[#02343F]">
+                          Email
+                        </Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          name="email"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500"
+                        />
+                      </div>
+                      <div className="flex flex-col items-center gap-2">
+                        <Label htmlFor="password" className="text-base text-[#02343F]">
+                          Password
+                        </Label>
+                        <Input
+                          id="password"
+                          type="password"
+                          name="password"
+                          required
+                          className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500"
+                        />
+                      </div>
+                    </div>
+                    <div className="row-span-2 flex flex-col justify-center items-center gap-2">
+                      <Label htmlFor="avatar" className="text-base text-[#02343F]">
+                        Avatar
+                      </Label>
+                      <div className="w-full max-w-4xl mx-auto border border-dashed bg-background dark:bg-[#02343F] border-lime-200 dark:border-lime-800 rounded-lg scale-80 ">
+                        <FileUpload
+                          name="directImage"
+                          onChange={handleFileUpload}
+                        />
+                      </div>
+                      <div className="flex text-sm gap-3">
+                        <span className="">Or</span>
+                        <span className="rotate-3">|</span>
+                        <span>Share avatar link</span>
+                      </div>
+                      <Input
+                        id="avatar"
+                        type="url"
+                        name="avatar"
+                        className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500 focus:border-green-600 dark:focus:border-green-400"
+                        placeholder="https://res.cloudinary.com/.../avatar.png"
+                      />
+                    </div>
+                  </form>
+              {/*                   
+                  <div className="flex justify-around items-center gap-8 m-5">
+                    <hr className="border w-full" />
+                    <span className="flex text-center text-sm">Or</span>
+                    <hr className="border w-full" />
+                  </div>
+
                   <div className="flex justify-center gap-2 mb-4">
                     <TextureButton variant="icon" className="">
-                      {/* Google Icon */}
+                      Google Icon
                       <svg
                         width="256"
                         height="262"
@@ -148,9 +262,9 @@ const SignUpPage = () => {
                           fill="#EB4335"
                         />
                       </svg>
-                      {/* <span className="pl-2">Google</span> */}
+                      <span className="pl-2">Google</span>
                     </TextureButton>
-                    {/* <TextureButton variant="icon">
+                    <TextureButton variant="icon">
                       <svg
                         viewBox="0 0 256 250"
                         width="256"
@@ -166,115 +280,38 @@ const SignUpPage = () => {
                         />
                       </svg>
                       <span className="pl-2">Github</span>
-                    </TextureButton> */}
+                    </TextureButton>
                   </div>
-                  <div className="flex justify-around items-center gap-8 m-5">
-                      <hr className="border w-full" />
-                      <span className="flex text-center text-sm">Or</span>
-                      <hr className="border w-full" />
-                  </div>
-
-                  <form
-                    id="signup"
-                    onSubmit={handleForm}
-                    className="grid grid-cols-2 max-h-screen max-w-screen text-base gap-6"
-                  >
-                    <div className="flex flex-col row-span-2 justify-center gap-6">
-                      <div className="flex flex-col items-center gap-2">
-                        {/* <div> */}
-                        <Label htmlFor="name" className="text-base">Name</Label>
-                        <Input
-                          id="name"
-                          type="text"
-                          name="name"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                        {/* </div> */}
-                        {/* <div>
-                        <Label htmlFor="last">Last Name</Label>
-                        <Input
-                          id="last"
-                          type="last"
-                          name="last"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                      </div> */}
-                      </div>
-                      <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="username" className="text-base">Username</Label>
-                        <Input id="username"
-                          type="text"
-                          name="username"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                      </div>
-                      <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="email" className="text-base">Email</Label>
-                        <Input 
-                        id="email"
-                          type="email"
-                          name="email"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                      </div>
-                      <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="password" className="text-base">Password</Label>
-                        <Input id="password"
-                          type="password"
-                          name="password"
-                          required
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                      </div>
-                    </div>
-                    <div className="row-span-2 flex flex-col justify-center items-center gap-2">
-                      <Label htmlFor="avatar" className="text-base">Avatar</Label>
-                      <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
-                        <FileUpload name="directImage" onChange={handleFileUpload} />
-                      </div>
-                      <div className="flex text-sm gap-3"><span className="">Or</span><span className="rotate-3">|</span><span>Share avatar link</span></div>
-                      <Input
-                          id="avatar"
-                          type="url"
-                          name="avatar"
-                          className="w-full px-4 py-2 rounded-md border border-neutral-300 dark:border-neutral-700 bg-white/80 dark:bg-neutral-800/80 placeholder-neutral-400 dark:placeholder-neutral-500"
-                        />
-                    </div>
-                  </form>
+              */}
                 </TextureCardContent>
                 <TextureSeparator />
                 <TextureCardFooter className="flex items-center justify-center border-b rounded-b-sm">
                   <TextureButton
                     type="submit"
                     form="signup"
-                    variant="accent"
-                    className="w-[50%]"
+                    variant="icon"
+                    className="w-[40%]"
                     disabled={isLoading || isUploading}
                   >
-                    {isLoading ? (
-                      <LoaderFive text="Setting up your existence..." />
-                    ) : (
-                      <div className="flex gap-1 items-center justify-center text-xl font-bold">
-                        Sign Up
-                        <ArrowRightIcon
-                          size={32}
-                          className="h-4 w-4 text-neutral-50 mb-0.5"
-                        />
-                      </div>
-                    )}
+                    <div className="flex gap-1 items-center justify-center text-xl font-bold">
+                      Sign Up
+                      <ArrowRightIcon
+                        size={32}
+                        className="h-4 w-4 text-lime-50 mb-0.5"
+                      />
+                    </div>
                   </TextureButton>
                 </TextureCardFooter>
 
-                <div className="dark:bg-neutral-800 bg-stone-100 pt-px rounded-b-[20px] overflow-hidden ">
+                <div className="dark:bg-lime-800 bg-green-50 pt-px rounded-b-[20px] overflow-hidden ">
                   <div className="flex flex-col items-center justify-center">
                     <div className="py-2 px-2">
                       <div className="text-center text-sm">
                         Already have an account?
-                        <Link href="/auth/signin" className="text-primary"> Sign in</Link>
+                        <Link href="/auth/signin" className="text-primary">
+                          {" "}
+                          Sign in
+                        </Link>
                       </div>
                     </div>
                   </div>
