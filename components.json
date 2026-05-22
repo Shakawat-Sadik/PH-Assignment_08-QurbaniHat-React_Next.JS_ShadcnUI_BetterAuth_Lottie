@@ -23,6 +23,8 @@
   },
   "registries": {
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
-    "@gooseui": "https://gooseui.pro/r/{name}.json"
+    "@gooseui": "https://gooseui.pro/r/{name}.json",
+    "@nexus-labs": "https://nexus-ui.com/r/{name}.json",
+    "@elements": "https://www.tryelements.dev/r/{name}.json"
   }
 }

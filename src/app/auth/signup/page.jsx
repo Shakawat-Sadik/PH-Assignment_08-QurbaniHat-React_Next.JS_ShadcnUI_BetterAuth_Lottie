@@ -139,12 +139,12 @@ const SignUpPage = () => {
                   <form
                     id="signup"
                     onSubmit={handleForm}
-                    className="grid grid-cols-2 max-h-screen max-w-screen text-base text-[#02343F] gap-6"
+                    className="grid grid-cols-2 max-h-screen max-w-screen text-base gap-6"
                   >
                     <div className="flex flex-col row-span-2 justify-center gap-6">
                       <div className="flex flex-col items-center gap-2">
                         {/* <div> */}
-                        <Label htmlFor="name" className="text-base text-[#02343F]">
+                        <Label htmlFor="name" className="text-base">
                           Name
                         </Label>
                         <Input
@@ -167,7 +167,7 @@ const SignUpPage = () => {
                       </div> */}
                       </div>
                       <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="username" className="text-base text-[#02343F]">
+                        <Label htmlFor="username" className="text-base">
                           Username
                         </Label>
                         <Input
@@ -179,7 +179,7 @@ const SignUpPage = () => {
                         />
                       </div>
                       <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="email" className="text-base text-[#02343F]">
+                        <Label htmlFor="email" className="text-base">
                           Email
                         </Label>
                         <Input
@@ -191,7 +191,7 @@ const SignUpPage = () => {
                         />
                       </div>
                       <div className="flex flex-col items-center gap-2">
-                        <Label htmlFor="password" className="text-base text-[#02343F]">
+                        <Label htmlFor="password" className="text-base">
                           Password
                         </Label>
                         <Input
@@ -204,7 +204,7 @@ const SignUpPage = () => {
                       </div>
                     </div>
                     <div className="row-span-2 flex flex-col justify-center items-center gap-2">
-                      <Label htmlFor="avatar" className="text-base text-[#02343F]">
+                      <Label htmlFor="avatar" className="text-base">
                         Avatar
                       </Label>
                       <div className="w-full max-w-4xl mx-auto border border-dashed bg-background dark:bg-[#02343F] border-lime-200 dark:border-lime-800 rounded-lg scale-80 ">
@@ -222,12 +222,12 @@ const SignUpPage = () => {
                         id="avatar"
                         type="url"
                         name="avatar"
-                        className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500 focus:border-green-600 dark:focus:border-green-400"
+                        className="w-full px-4 py-2 rounded-md border border-lime-300 dark:border-lime-700 bg-background/80 dark:bg-lime-800/80 placeholder-lime-400 dark:placeholder-lime-500 "
                         placeholder="https://res.cloudinary.com/.../avatar.png"
                       />
                     </div>
                   </form>
-              {/*                   
+
                   <div className="flex justify-around items-center gap-8 m-5">
                     <hr className="border w-full" />
                     <span className="flex text-center text-sm">Or</span>
@@ -236,7 +236,7 @@ const SignUpPage = () => {
 
                   <div className="flex justify-center gap-2 mb-4">
                     <TextureButton variant="icon" className="">
-                      Google Icon
+                      {/* Google Icon */}
                       <svg
                         width="256"
                         height="262"
@@ -262,9 +262,9 @@ const SignUpPage = () => {
                           fill="#EB4335"
                         />
                       </svg>
-                      <span className="pl-2">Google</span>
+                      {/* <span className="pl-2">Google</span> */}
                     </TextureButton>
-                    <TextureButton variant="icon">
+                    {/* <TextureButton variant="icon">
                       <svg
                         viewBox="0 0 256 250"
                         width="256"
@@ -280,17 +280,16 @@ const SignUpPage = () => {
                         />
                       </svg>
                       <span className="pl-2">Github</span>
-                    </TextureButton>
+                    </TextureButton> */}
                   </div>
-              */}
                 </TextureCardContent>
                 <TextureSeparator />
                 <TextureCardFooter className="flex items-center justify-center border-b rounded-b-sm">
                   <TextureButton
                     type="submit"
                     form="signup"
-                    variant="icon"
-                    className="w-[40%]"
+                    variant="accent"
+                    className="w-[50%]"
                     disabled={isLoading || isUploading}
                   >
                     <div className="flex gap-1 items-center justify-center text-xl font-bold">
@@ -303,7 +302,7 @@ const SignUpPage = () => {
                   </TextureButton>
                 </TextureCardFooter>
 
-                <div className="dark:bg-lime-800 bg-green-50 pt-px rounded-b-[20px] overflow-hidden ">
+                <div className="dark:bg-lime-800 bg-stone-100 pt-px rounded-b-[20px] overflow-hidden ">
                   <div className="flex flex-col items-center justify-center">
                     <div className="py-2 px-2">
                       <div className="text-center text-sm">

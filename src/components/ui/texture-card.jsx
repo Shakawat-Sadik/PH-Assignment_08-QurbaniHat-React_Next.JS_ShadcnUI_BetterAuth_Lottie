@@ -7,7 +7,7 @@ const TextureCardStyled = ({ className, children, ...props }, ref) => (
     ref={ref}
     className={cn(
       "rounded-[24px] border border-white/60 dark:border-stone-950/60",
-      "bg-gradient-to-b dark:from-neutral-800 dark:to-neutral-900 from-neutral-100 to-white/70",
+      "bg-linear-to-b dark:from-neutral-800 dark:to-neutral-900 from-neutral-100 to-white/70",
       className
     )}
     {...props}>
