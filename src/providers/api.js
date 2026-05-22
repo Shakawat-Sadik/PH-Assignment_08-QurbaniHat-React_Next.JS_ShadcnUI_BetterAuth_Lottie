@@ -3,7 +3,7 @@
 export const animalsFetch = async () => {
   const baseURL = process.env.NEXT_PUBLIC_BASE_URL || process.env.BETTER_AUTH_URL;
   try {
-    const res = await fetch("https://api.npoint.io/8982ace3b4fd9eeb22fC");
+    const res = await fetch("https://api.npoint.io/8982ace3b4fd9eeb22fc");
     const intRes = await fetch(`${baseURL}/animalsEndpoint.json`);
     if (res.ok) {
       return await res.json();
