@@ -30,24 +30,24 @@ A modern livestock marketplace where users can explore animals for Qurbani such 
 
 ## **1\. Layout Structure**
 
-### **Navbar**
+### **Navbar** ✅
 
-* Logo  
-* Links: Home, All Animals  
-* If logged in: avatar and logout  
-* If logged out: login and register buttons
+- [x] * Logo  
+- [x] * Links: Home, All Animals  
+- [x] * If logged in: avatar and logout  
+- [x] * If logged out: login and register buttons
 
-### **Footer**
+### **Footer** ✅
 
-* Contact info  
-* Social links  
-* About section
+- [x] * Contact info  
+- [x] * Social links  
+- [x] * About section
 
 ## **2\. Animal Data**
 
-Create a JSON file with at least 6 animals including id, name, type, breed, price, weight, age, location, description, image, category.
+- [x] Create a JSON file with at least 6 animals including id, name, type, breed, price, weight, age, location, description, image, category.
 
-\[
+[
 
 {
 
@@ -81,9 +81,9 @@ Create a JSON file with at least 6 animals including id, name, type, breed, pric
 
 ## **3\. Home Page**
 
-* Hero section with banner and browse button  
-* Featured animals (4 items)  
-* Extra sections: Qurbani Tips and Top Breeds
+- [ ] * Hero section with banner and browse button  
+- [ ] * Featured animals (4 items)  
+- [ ] * Extra sections: Qurbani Tips and Top Breeds
 
 ## **4\. All Animals Page**
 

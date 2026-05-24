@@ -18,7 +18,7 @@ const Navbar = ({ className }) => {
         className,
       )}
     >
-      <div className="flex h-full items-center bg-background/75 dark:bg-background/30 py-6 px-10">
+      <div className="flex h-full items-center bg-[#50c895]/40 dark:bg-background/30 py-6 px-10">
         <div className="flex flex-1 items-center justify-between z-20">
           <div className="flex items-center space-x-6">
             <Link href="/" className="text-3xl font-semibold">

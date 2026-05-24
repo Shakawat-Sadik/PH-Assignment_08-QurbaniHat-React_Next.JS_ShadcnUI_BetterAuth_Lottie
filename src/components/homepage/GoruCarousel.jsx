@@ -100,7 +100,7 @@ export default function GoruCarousel({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       className={cn(
-        "relative flex flex-col items-center justify-center gap-8 outline-none",
+        "p-25 relative flex flex-col items-center justify-center gap-8 outline-none",
         className,
       )}
     >

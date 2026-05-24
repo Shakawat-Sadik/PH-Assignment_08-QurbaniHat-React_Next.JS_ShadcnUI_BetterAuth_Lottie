@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
@@ -25,8 +26,9 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar className="sticky top-0 z-100"/>
-        {children}
+        <Navbar className="sticky top-0 w-full z-90"/>
+        <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+        <Footer />
         <SpeedInsights />
       </body>
     </html>

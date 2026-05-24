@@ -1,3 +1,5 @@
+import { CircularCarousel } from "@/components/circular-carousel";
+import { HeroAurora } from "@/components/hero";
 import GoruCarousel from "@/components/homepage/GoruCarousel";
 import Image from "next/image";
 
@@ -14,8 +16,10 @@ export default function Home() {
     { id: "g9", title: "Goru 9", description: "Well-fed", tag: "Available" },
     ];
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <GoruCarousel className="scale-125" items={items}/>
+    <div className="flex flex-col h-full flex-1 items-center justify-center bg-background/50 py-10 px-25">
+      <HeroAurora />
+      <GoruCarousel className="" items={items}/>
+      <CircularCarousel items={items} />
     </div>
   );
 }
