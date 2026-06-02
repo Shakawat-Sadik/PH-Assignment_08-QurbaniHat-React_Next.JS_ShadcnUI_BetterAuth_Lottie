@@ -15,11 +15,11 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import Link from "next/link";
-import { useSession } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 const BookingForm = ({ animal }) => {
-  const session = useSession?.();
-  const user = session?.user || null;
+  const {data: uSession, isPending} = authClient.useSession();
+  const user = uSession?.user;
 
   const [form, setForm] = useState({
     name: user?.name || "",
