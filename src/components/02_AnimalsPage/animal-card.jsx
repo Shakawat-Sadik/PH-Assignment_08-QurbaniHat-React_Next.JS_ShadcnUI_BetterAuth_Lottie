@@ -158,7 +158,7 @@ export default function AnimalCard({ animals }) {
           </DropdownMenuContent>
         </DropdownMenuPositioner>
       </DropdownMenu>
-      <div className="grid w-full grid-cols-1 gap-4 px-2 py-4 sm:grid-cols-2 sm:gap-5 sm:px-4 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid w-full h-full flex-1 grid-cols-1 gap-4 px-2 py-4 sm:grid-cols-2 sm:gap-5 sm:px-4 lg:grid-cols-3 xl:grid-cols-4">
         {sortedAnimals.map(
           ({
             id,
@@ -180,8 +180,8 @@ export default function AnimalCard({ animals }) {
             category,
             healthStatus,
           }) => (
-            <div key={id} className="h-full w-full rounded-lg p-2 sm:p-4 m-2 sm:m-4">
-              <Card className="relative mx-auto w-full max-w-sm overflow-hidden border-0 pt-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div key={id} className="h-full flex-1 w-full rounded-lg p-2 sm:p-4 m-2 sm:m-4">
+              <Card className="relative mx-auto w-full h-full overflow-hidden border-0 pt-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="relative">
                   <Image
                     src={image}
