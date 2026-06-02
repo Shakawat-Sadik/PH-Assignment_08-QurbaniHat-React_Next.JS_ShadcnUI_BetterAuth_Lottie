@@ -14,10 +14,12 @@ import { Label } from "@/components/ui/label";
 import { LoaderFive } from "@/components/ui/loader";
 import { TextureButton } from "@/components/ui/texture-button";
 import { authClient } from "@/lib/auth-client";
+import { eliteDateFormat } from "@/lib/utils";
 import { ArrowRightIcon, EyeIcon, TrashSimpleIcon, UserPlusIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const SignUpPage = () => {
   const router = useRouter();
