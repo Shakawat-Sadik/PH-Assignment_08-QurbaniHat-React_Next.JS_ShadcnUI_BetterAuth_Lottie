@@ -22,8 +22,14 @@ export function StatsCards({
   const [randNums, setRandNums] = React.useState(0);
 
   React.useEffect(() => {
-    setRandNums(() => Math.floor(Math.random() * showAnimals?.length));
-  }, [loading]);
+    if (!showAnimals?.length) return;
+
+    const timer = window.setTimeout(() => {
+      setRandNums(Math.floor(Math.random() * showAnimals.length));
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, [showAnimals?.length, loading]);
 
   /**
       const [randNums, setRandNums] = React.useState(0);
@@ -120,12 +126,12 @@ export function StatsCards({
                 <SwitchThumb className="group/thumb flex items-center justify-center">
                   {localeFor(id) === "bn-BD" ? (
                     <span
-                      className={`size-fit text-xs group-data-[checked]/thumb:hidden ${outsiderFontBN.className}`}
+                      className={`size-fit text-xs group-data-checked/thumb:hidden ${outsiderFontBN.className}`}
                     >
                       ৳
                     </span>
                   ) : (
-                    <span className="size-fit text-[0.625rem] leading-0.25 group-data-[unchecked]/thumb:hidden">
+                    <span className="size-fit text-[0.625rem] leading-px group-data-unchecked/thumb:hidden">
                       Tk
                     </span>
                   )}
@@ -182,11 +188,11 @@ export function StatsCards({
                 {(() => {
                   const id2 = randNums < 35 ? showAnimals?.[randNums+1]?.id : showAnimals?.[randNums-5]?.id;
                   return localeFor(id2) === "bn-BD" ? (
-                    <span className={`size-fit text-xs group-data-[checked]/thumb:hidden ${outsiderFontBN.className}`}>
+                    <span className={`size-fit text-xs group-data-checked/thumb:hidden ${outsiderFontBN.className}`}>
                       ৳
                     </span>
                   ) : (
-                    <span className="size-fit text-[0.625rem] leading-0.25 group-data-[unchecked]/thumb:hidden">Tk</span>
+                    <span className="size-fit text-[0.625rem] leading-px group-data-unchecked/thumb:hidden">Tk</span>
                   );
                 })()}
               </SwitchThumb>
@@ -206,7 +212,7 @@ export function StatsCards({
         {/* Card 3: Impressions */}
         <m.div
           className={cn(
-            `relative z-30 ${width} ${height} bg-[#FF4400] rounded-[16px] p-5 flex flex-col justify-between overflow-hidden border-8 border-card flex-shrink-0 hover:z-50`,
+            `relative z-30 ${width} ${height} bg-[#FF4400] rounded-[16px] p-5 flex flex-col justify-between overflow-hidden border-8 border-card shrink-0 hover:z-50`,
           )}
           initial={{
             rotate: 8,
@@ -241,11 +247,11 @@ export function StatsCards({
                 {(() => {
                   const id3 = randNums < 35 ? showAnimals?.[randNums+2]?.id : showAnimals?.[randNums-15]?.id;
                   return localeFor(id3) === "bn-BD" ? (
-                    <span className={`size-fit text-xs group-data-[checked]/thumb:hidden ${outsiderFontBN.className}`}>
+                    <span className={`size-fit text-xs group-data-checked/thumb:hidden ${outsiderFontBN.className}`}>
                       ৳
                     </span>
                   ) : (
-                    <span className="size-fit text-[0.625rem] leading-0.25 group-data-[unchecked]/thumb:hidden">Tk</span>
+                    <span className="size-fit text-[0.625rem] leading-px group-data-unchecked/thumb:hidden">Tk</span>
                   );
                 })()}
               </SwitchThumb>
@@ -300,11 +306,11 @@ export function StatsCards({
                 {(() => {
                   const id4 = randNums < 35 ? showAnimals?.[randNums+3]?.id : showAnimals?.[randNums-10]?.id;
                   return localeFor(id4) === "bn-BD" ? (
-                    <span className={`size-fit text-xs group-data-[checked]/thumb:hidden ${outsiderFontBN.className}`}>
+                    <span className={`size-fit text-xs group-data-checked/thumb:hidden ${outsiderFontBN.className}`}>
                       ৳
                     </span>
                   ) : (
-                    <span className="size-fit text-[0.625rem] leading-0.25 group-data-[unchecked]/thumb:hidden">Tk</span>
+                    <span className="size-fit text-[0.625rem] leading-px group-data-unchecked/thumb:hidden">Tk</span>
                   );
                 })()}
               </SwitchThumb>

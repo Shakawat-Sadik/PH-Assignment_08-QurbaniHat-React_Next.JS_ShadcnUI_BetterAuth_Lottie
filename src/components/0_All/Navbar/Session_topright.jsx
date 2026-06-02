@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { authClient, signOut } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import Image from "next/image";
 import { LoaderFive } from "../../ui/loader";
@@ -37,7 +37,7 @@ const SessionState = () => {
         
       </div>
       <GlassButton
-        onClick={signOutt}
+        onClick={() => signOutt(router)}
         className="flex flex-col items-center text p-6"
       >
         Log Out

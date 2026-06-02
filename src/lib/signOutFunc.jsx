@@ -1,6 +1,6 @@
 import { TrashSimpleIcon } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { authClient } from "@/lib/auth-client";
 import { eliteDateFormat } from "./utils";
 
 const sonnerFunctionality = {
@@ -11,14 +11,13 @@ const sonnerFunctionality = {
   },
 };
 
-export const signOutt = async () => {
+export const signOutt = async (router) => {
   toast.success("Logged out successfully", sonnerFunctionality);
   setTimeout(async () => {
-    const router = useRouter();
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/login");
+          router.push("/signin");
         },
       },
     });

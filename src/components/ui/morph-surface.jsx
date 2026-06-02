@@ -198,8 +198,8 @@ export function MorphSurface({
         className={cn(
           "relative flex flex-col items-center bottom-8 z-10 overflow-hidden",
           "bg-card dark:bg-muted",
-          "shadow-[0px_1px_1px_0px_rgba(0,_0,_0,_0.05),_0px_1px_1px_0px_rgba(255,_252,_240,_0.5)_inset,_0px_0px_0px_1px_hsla(0,_0%,_100%,_0.1)_inset,_0px_0px_1px_0px_rgba(28,_27,_26,_0.5)]",
-          "dark:shadow-[0px_1px_0px_0px_hsla(0,_0%,_0%,_0.02)_inset,_0px_0px_0px_1px_hsla(0,_0%,_0%,_0.02)_inset,_0px_0px_0px_1px_rgba(255,_255,_255,_0.25)]",
+          "shadow-[0px_1px_1px_0px_rgba(0,0,0,0.05),0px_1px_1px_0px_rgba(255,252,240,0.5)_inset,0px_0px_0px_1px_hsla(0,0%,100%,0.1)_inset,0px_0px_1px_0px_rgba(28,27,26,0.5)]",
+          "dark:shadow-[0px_1px_0px_0px_hsla(0,0%,0%,0.02)_inset,0px_0px_0px_1px_hsla(0,0%,0%,0.02)_inset,0px_0px_0px_1px_rgba(255,255,255,0.25)]",
           !showFeedback &&
             "cursor-pointer hover:brightness-105 transition-[filter] duration-200"
         )}
@@ -279,7 +279,7 @@ function MorphSurfaceDock() {
                   ...checkSpring,
                   delay: success ? 0.3 : 0,
                 }}
-                className="m-[2px]">
+                className="m-0.5">
                 <IconCheck />
               </motion.div>
             )}
@@ -293,7 +293,7 @@ function MorphSurfaceDock() {
     <button
       type="button"
       className={cn(
-        "m-[-8px] flex justify-end rounded-full p-2 flex-1 gap-1",
+        "-m-2 flex justify-end rounded-full p-2 flex-1 gap-1",
         "text-muted-foreground hover:text-foreground",
         "transition-colors duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
@@ -322,7 +322,7 @@ function MorphSurfaceDock() {
 
   return (
     <footer
-      className="flex items-center justify-center select-none whitespace-nowrap mt-auto h-[44px]">
+      className="flex items-center justify-center select-none whitespace-nowrap mt-auto h-11">
       <div className="flex items-center justify-center gap-6 px-3">
         <div className="flex items-center gap-2 w-fit">
           {indicatorElement}
@@ -393,14 +393,14 @@ const MorphSurfaceFeedback = React.forwardRef(({ onSuccess }, ref) => {
     <>
       <div className="flex justify-between py-1">
         <p
-          className="flex gap-[6px] text-sm items-center text-muted-foreground select-none z-[2] ml-[25px]">
+          className="flex gap-1.5 text-sm items-center text-muted-foreground select-none z-2 ml-6.25">
           {triggerLabel}
         </p>
         <button
           type="submit"
           ref={submitRef}
           className={cn(
-            "mt-1 flex items-center justify-center gap-1 text-sm -translate-y-[3px]",
+            "mt-1 flex items-center justify-center gap-1 text-sm -translate-y-0.75",
             "text-muted-foreground right-4 text-center bg-transparent select-none",
             "rounded-xl cursor-pointer pr-1",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -509,7 +509,7 @@ function Kbd({
   return (
     <kbd
       className={cn(
-        "w-6 h-6 bg-muted text-muted-foreground rounded flex items-center justify-center font-sans px-[6px] text-xs border",
+        "w-6 h-6 bg-muted text-muted-foreground rounded flex items-center justify-center font-sans px-1.5 text-xs border",
         className
       )}>
       {children}
