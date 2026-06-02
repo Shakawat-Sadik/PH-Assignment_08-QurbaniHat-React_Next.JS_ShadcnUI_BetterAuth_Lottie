@@ -26,7 +26,7 @@ export default async function Home() {
     tags: [tip.category, tip.icon].filter(Boolean),
     }));
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center gap-8 bg-background/50 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 xl:px-24">
+    <div className="flex w-full flex-1 flex-col items-center justify-center gap-12 bg-background/50 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 xl:px-24">
       <HeroAurora />
       <GoruCarousel className="" items={items} />
       <AnimalProvider>

@@ -130,7 +130,7 @@ export default function GoruCarousel({
       )}
     >
       {/* Circular track */}
-      <div className="relative h-64 w-full max-w-sm sm:h-70 sm:max-w-lg">
+      <div className="relative h-64 w-full max-w-sm sm:h-80 lg:h-100 sm:max-w-lg lg:max-w-full">
         <AnimatePresence mode="popLayout">
           {items.map((item, i) => {
             const pos = getItemPosition(i, activeIndex, total);
