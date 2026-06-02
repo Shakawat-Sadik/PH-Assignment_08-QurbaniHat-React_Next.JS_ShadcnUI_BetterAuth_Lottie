@@ -194,7 +194,7 @@ export default function AnimalCard({ animals }) {
                     {currency.format(price)}
                   </span>
                 </div>
-                <CardHeader>
+                <CardHeader className="flex-1">
                   <CardAction>
                     <Badge variant="secondary">Featured</Badge>
                   </CardAction>
@@ -205,7 +205,7 @@ export default function AnimalCard({ animals }) {
                       : description}
                   </CardDescription>
                 </CardHeader>
-                <CardFooter>
+                <CardFooter className="flex justify-start">
                   <Button asChild>
                     <Link href={`/animals/${id}`}>
                       Details
