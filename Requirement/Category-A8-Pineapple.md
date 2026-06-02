@@ -81,64 +81,64 @@ A modern livestock marketplace where users can explore animals for Qurbani such 
 
 ## **3\. Home Page**
 
-- [ ] * Hero section with banner and browse button  
-- [ ] * Featured animals (4 items)  
+- [x] * Hero section with banner and browse button  
+- [x] * Featured animals (4 items)  
 - [ ] * Extra sections: Qurbani Tips and Top Breeds
 
 ## **4\. All Animals Page**
 
-* Sort by price  
+* [x] Sort by price  
 * Animal cards with details button
 
 ## **5\. Animal Details Page**
 
-* Full details view  
-* Booking form (name, email, phone, address)  
-* Login required  
+* Full details view 
+* Booking form (name, email, phone, address) 
+* Login required
 * Show success toast message
 
 Note: The booking form will be reset on submit and show a success message. (Data will not save in DB or Local Storage)
 
 ## **Authentication**
 
-## **User Login**
+## **User Login**  ✅
 
 The user will  show  a Login page with a form , so that the user can Log in this application. 
 
-- Show a Title for Login.  & Form with following fields   
+- [x] Show a Title for Login.  & Form with following fields   
   ( Email , Password , Login button ) 
 
 If the user Login successfully then 
 
-- navigate him to his Home page.  
-- If not, show him an error with toast / error message anywhere in the form.
+- [x] navigate him to his Home page.  
+- [x] If not, show him an error with toast / error message anywhere in the form.
 
 There will be some other options like 
 
-- Show the user a Link for Register  so that he can go to the register page.   
-- Show users a Social Login Button ( Google only ) . on Clicking it   
-  - user authenticate with Google  
-  -  Navigate him to  his Home page.
+- [x] Show the user a Link for Register  so that he can go to the register page.   
+- [x] Show users a Social Login Button ( Google only ) . on Clicking it   
+  - [x] user authenticate with Google  
+  - [x] Navigate him to his Home page.
 
    
 **User Registration**  
 Create a register page with a form , so that the user can register himself in this application. 
 
-- Show a Title for registration and a Form with following fields
+- [x] Show a Title for registration and a Form with following fields
 
 ( Name , Email, Photo-url(link), Password & Register Button ) 
 
 If the user Register successfully then 
 
-- navigate him to his login page.  
-- If not, show him an error with toast / error message anywhere in the form.
+- [x] navigate him to his login page.  
+- [x] If not, show him an error with toast / error message anywhere in the form.
 
 There will be some other options like 
 
-- Show the user a Link for Login so that he can go to the Login page.   
-- Show users a Social Login Button ( Google only ) . on Clicking it   
-  - user authenticate with Google  
-  - Navigate the user to the Home page.
+- [x] Show the user a Link for Login so that he can go to the Login page.   
+- [x] Show users a Social Login Button ( Google only ) . on Clicking it   
+  - [x] user authenticate with Google  
+  - [x] Navigate the user to the Home page.
 
  💡Don’t implement email verification or forget password method as it will inconvenience the examiner. If you want, you can add these after receiving the assignment result.
 

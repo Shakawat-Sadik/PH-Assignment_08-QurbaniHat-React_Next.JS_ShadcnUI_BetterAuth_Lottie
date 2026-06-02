@@ -23,8 +23,19 @@ const auth = betterAuth({
     },
   },
   session: {
-    disableSessionRefresh: true
+    disableSessionRefresh: true,
   },
+  user: {
+    changeEmail: {
+      enabled: true,
+      updateEmailWithoutVerification: true,
+    },
+  },
+  // changePassword: {
+  //   currentPassword: currentPassword,
+  //   newPassword: newPassword,
+  //   revokeOtherSessions: true,
+  // },
   database: mongodbAdapter(db, {
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client,

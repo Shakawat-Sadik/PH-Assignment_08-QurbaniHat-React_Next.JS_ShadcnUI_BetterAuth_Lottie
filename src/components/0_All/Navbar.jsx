@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { DistortedGlass } from "./ui/distorted-glass";
+import { DistortedGlass } from "../ui/distorted-glass";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { LinkPreview } from "@/components/ui/link-preview";
 import Image from "next/image";
-import qurbani from "../../public/slazzer-preview-6ovgl.png";
+import qurbani from "../../../public/slazzer-preview-6ovgl.png";
 import SessionState from "./Navbar/Session_topright";
 
 const Navbar = ({ className }) => {

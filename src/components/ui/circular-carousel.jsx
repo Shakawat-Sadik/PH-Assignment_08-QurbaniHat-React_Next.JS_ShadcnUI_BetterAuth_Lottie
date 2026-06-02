@@ -31,7 +31,7 @@ function getItemPosition(index, activeIndex, total) {
   return { x, y, scale, opacity, zIndex, adjustedOffset };
 }
 
-export function CircularCarousel({
+export default function CircularCarousel({
   items,
   activeIndex: controlledIndex,
   onActiveChange,

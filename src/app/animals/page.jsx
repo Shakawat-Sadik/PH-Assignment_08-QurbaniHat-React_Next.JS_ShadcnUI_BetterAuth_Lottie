@@ -1,5 +1,5 @@
+import AnimalCard from "@/components/02_AnimalsPage/animal-card";
 import { animalsFetch } from "@/providers/api";
-import React from "react";
 
 const AnimalsPage = async () => {
   const animals = await animalsFetch();
@@ -12,16 +12,13 @@ const AnimalsPage = async () => {
   }, {});
 
   const knownTypes = Object.keys(animalCount);
-
   console.log(knownTypes);
 
   return (
-    <div>
-      {knownTypes.map((type) => (
-        <p className="text-xl" key={type}>
-          {type}: {animalCount[type] || 0}
-        </p>
-      ))}
+    <div className="flex flex-col items-center">
+      <div className="grid grid-cols-[auto] sm:grid-cols-[auto_auto] md:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto] h-full p-4 gap-5">
+        {<AnimalCard animals={animals} />}
+      </div>
     </div>
   );
 };

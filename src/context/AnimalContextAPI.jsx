@@ -2,4 +2,4 @@
 
 import { createContext } from "react";
 
-export const SignContext = createContext();
+export const AnimalContext = createContext();

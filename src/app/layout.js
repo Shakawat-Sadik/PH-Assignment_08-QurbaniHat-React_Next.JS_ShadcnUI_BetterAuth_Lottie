@@ -1,8 +1,10 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import Navbar from "@/components/0_All/Navbar";
+import Footer from "@/components/0_All/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/Theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,12 +26,18 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning={true}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar className="sticky top-0 w-full z-90"/>
-        <main className="flex min-h-0 flex-1 flex-col">{children}</main>
-        <Footer />
-        <SpeedInsights />
+      <body
+        className="min-h-full flex flex-col"
+      >
+        <ThemeProvider>
+          <Navbar className="sticky top-0 w-full z-90" />
+          <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+          <Footer />
+          <Toaster />
+          <SpeedInsights />
+        </ThemeProvider>
       </body>
     </html>
   );

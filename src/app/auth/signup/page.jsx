@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { LoaderFive } from "@/components/ui/loader";
 import { TextureButton } from "@/components/ui/texture-button";
 import { authClient } from "@/lib/auth-client";
-import { ArrowRightIcon, EyeIcon, UserPlusIcon } from "@phosphor-icons/react";
+import { ArrowRightIcon, EyeIcon, TrashSimpleIcon, UserPlusIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -27,6 +27,39 @@ const SignUpPage = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [signedUp, setSignedUp] = useState(false);
   const [visPass, setVisPass] = useState(false);
+
+  const sonnerFunctionality = {
+    description: eliteDateFormat(),
+    action: {
+      label: <TrashSimpleIcon size={24} />,
+      onClick: () => {},
+    },
+  };
+
+  const handleGLogin = async (e) => {
+      console.log(e.currentTarget); //Gotta learn useRef then I'll get back and create an overlay stating `Logging you in...` if used credential, `Googling you in...` if used Google sign in.
+      const data = await authClient.signIn.social(
+        {
+          provider: "google",
+          // callbackURL: "/",
+        },
+        {
+          onRequest: () => {
+            setIsLoading(true);
+            //   div.absolute.bg-background
+          },
+          onSuccess: () => {
+            toast.success("Logged in successfully!", sonnerFunctionality);
+            setIsLoading(false);
+            router.push("/");
+          },
+          onError: (error) => {
+            setIsLoading(false);
+            console.error(error);
+          },
+        },
+      );
+    };
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -48,16 +81,16 @@ const SignUpPage = () => {
         username,
         password,
         image:
-          imageUrl ||
-          "https://res.cloudinary.com/sadik-store/image/upload/v1779291140/avatar_my9zov.png",
+          imageUrl || "https://res.cloudinary.com/sadik-store/image/upload/v1779291140/avatar_my9zov.png",
         callbackURL: "/auth/signin",
       },
-      {
+      {        
         onRequest: () => {
           setIsLoading(true);
         },
         onSuccess: () => {
           setIsLoading(false);
+          toast.success("Account created successfully!", sonnerFunctionality);
           router.push("/");
         },
         onError: (error) => {
@@ -66,7 +99,7 @@ const SignUpPage = () => {
         },
       },
     );
-    console.log(data?.user, error);
+    // console.log(data?.user, error);
     !error && setSignedUp(true);
   };
 
@@ -227,7 +260,7 @@ const SignUpPage = () => {
                   </div>
 
                   <div className="flex justify-center gap-2 mb-4">
-                    <TextureButton variant="icon" className="">
+                    <TextureButton onClick={handleGLogin} variant="icon" className="">
                       {/* Google Icon */}
                       <svg
                         width="256"

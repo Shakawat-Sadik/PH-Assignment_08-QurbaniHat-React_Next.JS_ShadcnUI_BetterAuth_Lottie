@@ -1,4 +1,6 @@
-// import animalPromise from "/animalsEndpoint.json" // This only works in Vite or Create React App when json is kept in public folder
+// Next has 2 kinds of data fetching methods. One is this simple import and return way. The other one is creating a route and fetching from that. Import and return only works for server components. The other method, the route and fetch method, should work for both server and client components. Though I used that only for client component yet.
+// Regardless NextJS offer the most hassle free way of data fetching I've seen yet.
+
 import animalPromise from "@/providers/animalsEndpoint.json"
 
 export const animalsFetch = async () => {
@@ -15,16 +17,11 @@ export const animalsFetch = async () => {
   }
 
   try {
-    const intRes = await fetch("/animalsEndpoint.json");
-
     console.log("Serving data from the backup generator")
+    return animalPromise;
 
-    if (intRes.ok){
-      console.log("serving data from backup generator");
-      return await intRes.json();
-    }
   } catch (intError) {
-    console.warn("Failed to fetch animals data from backup generator", intError);
+    console.warn("Failed to fetch animals data from backup generator");
   }
 
   

@@ -19,6 +19,7 @@
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@tabler/icons-react": "^3.44.0",
+    "@unpic/react": "^1.0.2",
     "@uploadthing/react": "^7.3.3",
     "@vercel/speed-insights": "^2.0.0",
     "better-auth": "^1.6.11",

@@ -100,7 +100,7 @@ export default function GoruCarousel({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       className={cn(
-        "p-25 relative flex flex-col items-center justify-center gap-8 outline-none",
+        "p-6 relative flex flex-col items-center justify-center gap-8 outline-none",
         className,
       )}
     >
@@ -135,7 +135,7 @@ export default function GoruCarousel({
                 aria-selected={isActive}
                 role="option"
                 className={cn(
-                  "absolute left-1/2 top-1/2 flex h-32 w-48 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start justify-between rounded-2xl border border-white/10 bg-linear-to-b from-zinc-800/90 to-zinc-900/90 p-4 backdrop-blur-sm transition-shadow duration-300",
+                  "absolute left-1/2 top-1/2 flex h-32 w-48 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start justify-between rounded-2xl border border-border/20 bg-linear-to-b from-card/80 to-secondary/50 p-4 backdrop-blur-sm transition-shadow duration-300",
                   isActive
                     ? "shadow-[0_20px_60px_-12px_rgba(0,0,0,0.5)]"
                     : "shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_32px_-4px_rgba(0,0,0,0.4)]",
@@ -143,20 +143,20 @@ export default function GoruCarousel({
                 style={{ transformOrigin: "center center" }}
               >
                 {item.tag && (
-                  <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-white/70">
+                  <span className="rounded-full bg-popover/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
                     {item.tag}
                   </span>
                 )}
                 <div className="w-full">
                   <h3 className={cn(
                     "font-semibold leading-tight transition-colors duration-300",
-                    isActive ? "text-white text-4xl" : "text-white/80 text-xl"
+                    isActive ? "text-foreground text-4xl" : "text-muted-foreground text-xl"
                   )}>
                     {item.title}
                   </h3>
                   <p className={cn(
                     "mt-1 line-clamp-2 text-xs leading-relaxed transition-colors duration-300",
-                    isActive ? "text-white/60" : "text-white/40"
+                    isActive ? "text-muted-foreground" : "text-muted-foreground/70"
                   )}>
                     {item.description}
                   </p>
@@ -175,10 +175,10 @@ export default function GoruCarousel({
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
       >
-        <span className="text-5xl font-bold tracking-tight text-white/90">
+        <span className="text-5xl font-bold tracking-tight text-foreground">
           {String(activeIndex + 1).padStart(2, "0")}
         </span>
-        <span className="mt-1 text-xs text-white/40">
+        <span className="mt-1 text-xs text-muted-foreground">
           of {String(total).padStart(2, "0")}
         </span>
       </motion.div>
@@ -190,7 +190,7 @@ export default function GoruCarousel({
           whileTap={{ scale: 0.95 }}
           onClick={prev}
           aria-label="Previous item"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 backdrop-blur-sm transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border/20 bg-popover/5 text-foreground/70 backdrop-blur-sm transition-colors hover:bg-popover/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30"
         >
           <ChevronLeft className="size-5" />
         </motion.button>
@@ -206,8 +206,8 @@ export default function GoruCarousel({
               className={cn(
                 "h-1.5 rounded-full transition-all duration-300",
                 i === activeIndex
-                  ? "w-6 bg-white/80"
-                  : "w-1.5 bg-white/20 hover:bg-white/40",
+                  ? "w-6 bg-primary"
+                  : "w-1.5 bg-muted/50 hover:bg-muted/70",
               )}
               aria-label={`Go to item ${i + 1}`}
             />
@@ -219,7 +219,7 @@ export default function GoruCarousel({
           whileTap={{ scale: 0.95 }}
           onClick={next}
           aria-label="Next item"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 backdrop-blur-sm transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-white/30"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border/20 bg-popover/5 text-foreground/70 backdrop-blur-sm transition-colors hover:bg-popover/10 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/30"
         >
           <ChevronRight className="size-5" />
         </motion.button>

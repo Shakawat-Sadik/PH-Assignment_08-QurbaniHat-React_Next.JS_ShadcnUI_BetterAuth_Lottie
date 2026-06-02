@@ -1,6 +1,9 @@
 "use client";
 
-import { LoaderFive, LoaderFour, LoaderThree } from "@/components/ui/loader";
+import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { eliteDateFormat } from "@/lib/utils";
+import { LoaderFive } from "@/components/ui/loader";
 import { Label } from "@/components/ui/label";
 import {
   GlassCard,
@@ -12,13 +15,12 @@ import {
 } from "@/components/ui/glass-card";
 import { GlassInput } from "@/components/ui/glass-input";
 import { GlassButton } from "@/components/ui/glass-button";
-import { authClient } from "@/lib/auth-client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { EyeIcon, UserIcon } from "@phosphor-icons/react";
+import { EyeIcon, TrashSimpleIcon, UserIcon } from "@phosphor-icons/react";
+import { toast } from "sonner";
 
 const SignInPage = () => {
 
@@ -26,9 +28,17 @@ const SignInPage = () => {
   const {user} = uSession ?? {};
   
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [visPass, setVisPass] = useState(false);
-  
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [visPass, setVisPass] = React.useState(false);
+
+  const sonnerFunctionality = {
+    description: eliteDateFormat(),
+    action: {
+      label: <TrashSimpleIcon size={24} />,
+      onClick: () => {},
+    },
+  };
+
   const handleForm = async (e) => {
     e.preventDefault();
     const ct = new FormData(e.currentTarget);
@@ -46,14 +56,16 @@ const SignInPage = () => {
         onSuccess: () => {
           setIsLoading(false);
           router.back() || router.push("/");
+          toast.success("Logged in successfully!", sonnerFunctionality);
         },
         onError: (error) => {
           setIsLoading(false);
           console.error(error);
+          toast.error("Failed to log in. Please try again.", sonnerFunctionality);
         },
       }
     );
-    console.log(data, error);
+    // console.log(data, error);
   };
   console.log(user?.name);
   

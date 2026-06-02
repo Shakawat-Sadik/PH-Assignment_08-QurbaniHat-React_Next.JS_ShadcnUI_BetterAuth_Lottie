@@ -1,7 +1,7 @@
-import { CircularCarousel } from "@/components/circular-carousel";
-import { HeroAurora } from "@/components/hero";
-import GoruCarousel from "@/components/homepage/GoruCarousel";
-import Image from "next/image";
+import { HeroAurora } from "@/components/01_homepage/hero";
+import GoruCarousel from "@/components/01_homepage/GoruCarousel";
+import { StatsCards } from "@/components/01_homepage/stats-cards";
+import AnimalProvider from "@/context/AnimalProvider";
 
 export default function Home() {
   const items = [
@@ -16,10 +16,12 @@ export default function Home() {
     { id: "g9", title: "Goru 9", description: "Well-fed", tag: "Available" },
     ];
   return (
-    <div className="flex flex-col h-full flex-1 items-center justify-center bg-background/50 py-10 px-25">
+    <div className="flex flex-col h-full flex-1 items-center justify-center gap-10 bg-background/50 py-10 px-25">
       <HeroAurora />
       <GoruCarousel className="" items={items}/>
-      <CircularCarousel items={items} />
+      <AnimalProvider>
+        <StatsCards />
+      </AnimalProvider>
     </div>
   );
 }
