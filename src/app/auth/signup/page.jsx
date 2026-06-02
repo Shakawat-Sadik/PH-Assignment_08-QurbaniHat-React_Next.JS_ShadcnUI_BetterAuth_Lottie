@@ -145,8 +145,11 @@ const SignUpPage = () => {
   return (
     <div className="relative flex items-center justify-center -mt-18 h-full flex-1">
       {isLoading && (
-        <div className="z-50 h-full w-full glass-effect bg-(--glass-effect-bg) size-full text-2xl">
-          <LoaderFive text="We're being introduced to you..." />
+        <div className="absolute inset-0 z-100 flex items-center justify-center">
+          <div className="z-50 h-full w-full glass-effect bg-(--glass-effect-bg) size-full text-2xl" />
+          <div className="absolute inset-0 z-50 flex items-center justify-center pointer-events-none text-3xl">
+            <LoaderFive text="We're being introduced to you..." />
+          </div>
         </div>
       )}
 

@@ -16,10 +16,23 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
+import { TrashSimpleIcon } from "@phosphor-icons/react";
+import { eliteDateFormat } from "@/lib/utils";
+import Image from "next/image";
+import loader from "@/components/dancing-polish.gif";
 
 const BookingForm = ({ animal }) => {
+  const sonnerFunctionality = {
+    description: eliteDateFormat(),
+    action: {
+      label: <TrashSimpleIcon size={24} />,
+      onClick: () => {},
+    },
+  };
+
   const {data: uSession, isPending} = authClient.useSession();
   const user = uSession?.user;
+  console.log(user);
 
   const [form, setForm] = useState({
     name: user?.name || "",
@@ -38,23 +51,26 @@ const BookingForm = ({ animal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
-      toast.error("Please sign in to place a booking.");
+      toast.error("Please sign in to place a booking.", sonnerFunctionality);
       return;
     }
     setSubmitting(true);
     try {
       // Simulate booking process; requirement says do not persist.
       await new Promise((r) => setTimeout(r, 700));
-      toast.success("Booking submitted successfully!");
+      toast.success("Booking submitted successfully!", sonnerFunctionality);
       setForm({ name: user?.name || "", email: user?.email || "", phone: "", address: "" });
     } catch (err) {
-      toast.error("Failed to submit booking. Try again.");
+      toast.error("Failed to submit booking. Try again.", sonnerFunctionality);
     } finally {
       setSubmitting(false);
     }
   };
 
-  return (
+  return isPending ? (
+      <div className="min-h-screen flex justify-center items-center w-full max-w-3xl mx-auto">
+        <Image src={loader} alt="Loading..." width={64} height={64} />
+      </div>) : (
     <div className="w-full max-w-3xl mx-auto">
       <Toaster />
       <TextureCardStyled>

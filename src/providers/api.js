@@ -1,7 +1,8 @@
 // Next has 2 kinds of data fetching methods. One is this simple import and return way. The other one is creating a route and fetching from that. Import and return only works for server components. The other method, the route and fetch method, should work for both server and client components. Though I used that only for client component yet.
 // Regardless NextJS offer the most hassle free way of data fetching I've seen yet.
 
-import animalPromise from "@/providers/animalsEndpoint.json"
+import animalPromise from "@/providers/animalsEndpoint.json";
+import qTipsData from "@/providers/QTips.json";
 
 export const animalsFetch = async () => {
   // const baseURL = process.env.NEXT_PUBLIC_BASE_URL || process.env.BETTER_AUTH_URL;
@@ -27,3 +28,12 @@ export const animalsFetch = async () => {
   
   return [];
 };
+
+export const qTips = async () => {
+  try {
+    return qTipsData;
+  } catch (error) {
+    console.warn("Failed to fetch QTips data", error);
+    return [];
+  }
+}

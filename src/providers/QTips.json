@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Verify the Age Requirement",
+    "titleBn": "বয়সের শর্ত নিশ্চিত করুন",
+    "description": "The animal must meet the minimum Islamic age requirement: 1 year for goats/sheep, 2 years for cows/buffaloes, and 5 years for camels. Checking the teeth (Doodh dant) is the best way to verify age.",
+    "descriptionBn": "পশুর বয়স শরয়ী বয়সে পৌঁছেছে কিনা নিশ্চিত করতে হবে: ছাগল/ভেড়ার জন্য ১ বছর, গরু/মহিষের জন্য ২ বছর এবং উটের জন্য ৫ বছর। দাঁত (দুধ দাঁত) পরীক্ষা করে বয়স নিশ্চিত করাই সেরা উপায়।",
+    "icon": "📅",
+    "category": "Shariah",
+    "priority": "Essential"
+  },
+  {
+    "id": 2,
+    "title": "Check for Physical Defects",
+    "titleBn": "শারীরিক ত্রুটি পরীক্ষা করুন",
+    "description": "The Qurbani animal must be free from major defects. It cannot be blind, one-eyed, visibly lame, extremely thin, or missing a major part of its ear or horn. Always inspect the animal thoroughly before purchasing.",
+    "descriptionBn": "কুরবানির পশু অবশ্যই বড় কোনো ত্রুটিমুক্ত হতে হবে। এটি অন্ধ, কানা, পঙ্গু, অতিরিক্ত রোগা বা কান/শিং এর বড় অংশ বিহীন হতে পারে না। কেনার আগে পশু ভালোভাবে পরীক্ষা করুন।",
+    "icon": "🔍",
+    "category": "Selection",
+    "priority": "Essential"
+  },
+  {
+    "id": 3,
+    "title": "Correct Time of Sacrifice",
+    "titleBn": "কুরবানির সঠিক সময়",
+    "description": "Qurbani can only be performed after the Eid-ul-Adha prayer on the 10th of Dhul Hijjah. Sacrificing before the Eid prayer is invalid. The permissible time extends until the sunset of the 12th of Dhul Hijjah.",
+    "descriptionBn": "কুরবানি কেবল ১০ই জিলহজ ঈদুল আযহার নামাজের পরে আদায় করা যায়। ঈদের নামাজের আগে কুরবানি দেওয়া শরয়ী বিধান অনুযায়ী বাতিল। কুরবানির সময় ১২ই জিলহজের সূর্যাস্ত পর্যন্ত বিস্তৃত।",
+    "icon": "🕐",
+    "category": "Shariah",
+    "priority": "Essential"
+  },
+  {
+    "id": 4,
+    "title": "Do Not Cut Hair and Nails",
+    "titleBn": "চুল ও নখ কাটবেন না",
+    "description": "For those who intend to offer Qurbani and have the financial means, it is Mustahabb (recommended in Hanafi school) to avoid cutting hair or nails from the 1st of Dhul Hijjah until the sacrifice is completed.",
+    "descriptionBn": "যারা কুরবানি দেওয়ার নিয়ত ও সামর্থ্য রাখেন, তাদের জন্য ১ই জিলহজ থেকে কুরবানি শেষ হওয়া পর্যন্ত চুল ও নখ কাটা মাকরুহ (হানাফী মাযহাব অনুযায়ী)।",
+    "icon": "✋",
+    "category": "Sunnah",
+    "priority": "Recommended"
+  },
+  {
+    "id": 5,
+    "title": "Slaughter with Sunnah Etiquette",
+    "titleBn": "সুন্নত তরিকায় যবাই করুন",
+    "description": "The animal should be faced towards the Qiblah. Slaughter with a sharp knife, recite 'Bismillahi Allahu Akbar', and cut the four main passages (windpipe, food tract, and two jugular veins) swiftly to minimize suffering.",
+    "descriptionBn": "পশুকে কিবলামুখী করে শুইয়ে দিতে হবে। ধারালো ছুরি দিয়ে 'বিসমিল্লাহি আল্লাহু আকবার' পড়ে চারটি প্রধান নাড়ি (কণ্ঠনালী, খাদ্যনালী এবং দুটি রক্তনালী) একই সাথে দ্রুত কাটতে হবে যাতে পশুর কম কষ্ট হয়।",
+    "icon": "🕌",
+    "category": "Process",
+    "priority": "Essential"
+  },
+  {
+    "id": 6,
+    "title": "Treat the Animal Gently",
+    "titleBn": "পশুর প্রতি সদয় আচরণ করুন",
+    "description": "Do not drag the animal forcefully to the slaughter place. Sharpen the knife out of the animal's sight, and do not slaughter one animal in front of another. Islam emphasizes minimizing the animal's fear and pain.",
+    "descriptionBn": "পশুকে জোর করে টেনে হিঁচড়ে যবাইখানায় নিয়ে যাবেন না। ছুরি পশুর দৃষ্টির বাইরে ধারালো করুন এবং একটি পশুর সামনে অন্যটিকে যবাই করবেন না। ইসলাম পশুর ভয় ও কষ্ট কমানোর ওপর জোর দেয়।",
+    "icon": "🤲",
+    "category": "Ethics",
+    "priority": "High"
+  },
+  {
+    "id": 7,
+    "title": "Divide Meat into Three Parts",
+    "titleBn": "মাংস তিন ভাগে বণ্টন করুন",
+    "description": "It is Sunnah to divide the Qurbani meat into three equal portions: one for your own family, one for relatives and friends, and one for the poor and needy. You can also keep all of it for personal consumption if needed.",
+    "descriptionBn": "কুরবানির মাংস তিন ভাগে বণ্টন করা সুন্নত: এক ভাগ নিজের পরিবারের জন্য, এক ভাগ আত্মীয়-স্বজন ও বন্ধুদের জন্য এবং এক ভাগ গরিব-দুঃখীদের জন্য। প্রয়োজনে সবটুকু নিজেও খেতে পারেন।",
+    "icon": "⚖️",
+    "category": "Distribution",
+    "priority": "Sunnah"
+  },
+  {
+    "id": 8,
+    "title": "Do Not Sell the Meat or Skin",
+    "titleBn": "মাংস বা চামড়া বিক্রয় করবেন না",
+    "description": "It is impermissible to sell the meat, fat, or skin of the sacrificed animal. If you sell the skin, you must give the equivalent money in charity. However, you can use the skin for personal purposes or give it away.",
+    "descriptionBn": "কুরবানির পশুর মাংস, চর্বি বা চামড়া বিক্রি করা হারাম। চামড়া বিক্রি করলে তার সমপরিমাণ অর্থ দান করতে হবে। তবে চামড়া নিজে ব্যবহার করতে বা অন্যকে দান করতে পারেন।",
+    "icon": "🚫",
+    "category": "Shariah",
+    "priority": "Essential"
+  },
+  {
+    "id": 9,
+    "title": "Buy Early and Verify Health",
+    "titleBn": "সময়মতো কিনুন ও স্বাস্থ্য যাচাই করুন",
+    "description": "Avoid the last-minute rush and price hikes by purchasing your animal a few days before Eid. Ensure the animal is vaccinated, active, eating well, and properly adapted to the local environment before the day of sacrifice.",
+    "descriptionBn": "ঈদের কয়েকদিন আগেই পশু কিনে শেষ মুহূর্তের ভিড় ও অতিরিক্ত মূল্য থেকে বিরত থাকুন। কুরবানির দিনের আগে নিশ্চিত করুন যে পশু টিকা প্রাপ্ত, সক্রিয়, সুস্থ এবং পরিবেশের সাথে মানিয়ে নিয়েছে।",
+    "icon": "✅",
+    "category": "Practical",
+    "priority": "High"
+  }
+]

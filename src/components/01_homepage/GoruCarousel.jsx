@@ -37,6 +37,21 @@ function getItemPosition(index, activeIndex, total) {
   return { x, y, scale, opacity, zIndex, adjustedOffset };
 }
 
+function priorityClasses(priority) {
+  switch (priority) {
+    case "Essential":
+      return "from-rose-500/25 via-rose-500/10 to-card/60";
+    case "High":
+      return "from-amber-400/25 via-amber-400/10 to-card/60";
+    case "Recommended":
+      return "from-emerald-400/20 via-emerald-400/10 to-card/60";
+    case "Sunnah":
+      return "from-sky-400/20 via-sky-400/10 to-card/60";
+    default:
+      return "from-card/80 via-card/60 to-secondary/50";
+  }
+}
+
 export default function GoruCarousel({
   items,
   activeIndex: controlledIndex,
@@ -48,6 +63,7 @@ export default function GoruCarousel({
   const [internalIndex, setInternalIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const intervalRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -85,6 +101,15 @@ export default function GoruCarousel({
     el?.addEventListener("keydown", handler);
     return () => el?.removeEventListener("keydown", handler);
   }, [next, prev]);
+
+  useEffect(() => {
+    if (!selectedItem) return;
+    const handler = (e) => {
+      if (e.key === "Escape") setSelectedItem(null);
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [selectedItem]);
 
   const activeItem = items[activeIndex];
 
@@ -130,34 +155,56 @@ export default function GoruCarousel({
                   duration: 0.65,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                onClick={() => goTo(i)}
+                onClick={() => {
+                  goTo(i);
+                  setSelectedItem(item);
+                }}
                 aria-label={item.title}
                 aria-selected={isActive}
                 role="option"
                 className={cn(
-                  "absolute left-1/2 top-1/2 flex h-32 w-48 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start justify-between rounded-2xl border border-border/20 bg-linear-to-b from-card/80 to-secondary/50 p-4 backdrop-blur-sm transition-shadow duration-300",
+                  "absolute left-1/2 top-1/2 flex h-40 w-64 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start gap-3 rounded-2xl border border-border/30 bg-linear-to-b p-4 backdrop-blur-sm transition-shadow duration-300",
+                  priorityClasses(item.priority),
                   isActive
-                    ? "shadow-[0_20px_60px_-12px_rgba(0,0,0,0.5)]"
-                    : "shadow-[0_8px_24px_-4px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_32px_-4px_rgba(0,0,0,0.4)]",
+                    ? "shadow-[0_24px_70px_-18px_rgba(0,0,0,0.55)]"
+                    : "shadow-[0_10px_30px_-8px_rgba(0,0,0,0.35)] hover:shadow-[0_14px_36px_-10px_rgba(0,0,0,0.45)]",
                 )}
                 style={{ transformOrigin: "center center" }}
               >
-                {item.tag && (
-                  <span className="rounded-full bg-popover/10 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                    {item.tag}
-                  </span>
-                )}
+                <div className="flex w-full items-center gap-2">
+                  {item.tags?.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {item.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-full bg-popover/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground/80"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {item.priority && (
+                    <span className="ml-auto rounded-full border border-border/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground/70">
+                      {item.priority}
+                    </span>
+                  )}
+                </div>
                 <div className="w-full">
-                  <h3 className={cn(
-                    "font-semibold leading-tight transition-colors duration-300",
-                    isActive ? "text-foreground text-4xl" : "text-muted-foreground text-xl"
-                  )}>
+                  <h3
+                    className={cn(
+                      "text-left font-semibold leading-tight transition-colors duration-300",
+                      isActive ? "text-foreground text-2xl" : "text-foreground/80 text-lg",
+                    )}
+                  >
                     {item.title}
                   </h3>
-                  <p className={cn(
-                    "mt-1 line-clamp-2 text-xs leading-relaxed transition-colors duration-300",
-                    isActive ? "text-muted-foreground" : "text-muted-foreground/70"
-                  )}>
+                  <p
+                    className={cn(
+                      "mt-2 line-clamp-2 text-left text-xs leading-relaxed transition-colors duration-300",
+                      isActive ? "text-muted-foreground" : "text-muted-foreground/80",
+                    )}
+                  >
                     {item.description}
                   </p>
                 </div>
@@ -182,6 +229,59 @@ export default function GoruCarousel({
           of {String(total).padStart(2, "0")}
         </span>
       </motion.div>
+
+      {selectedItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 glass-effect bg-black/40"
+            onClick={() => setSelectedItem(null)}
+            role="button"
+            tabIndex={0}
+            aria-label="Close details"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") setSelectedItem(null);
+            }}
+          />
+          <div
+            className={cn(
+              "relative z-10 w-full max-w-xl rounded-3xl border border-border/40 bg-linear-to-b p-6 shadow-2xl backdrop-blur-lg",
+              priorityClasses(selectedItem.priority),
+            )}
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex flex-wrap gap-2">
+                {selectedItem.tags?.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-popover/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-foreground/80"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              {selectedItem.priority && (
+                <span className="ml-auto rounded-full border border-border/40 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-foreground/70">
+                  {selectedItem.priority}
+                </span>
+              )}
+            </div>
+            <h3 className="mt-4 text-2xl font-semibold text-foreground">
+              {selectedItem.title}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {selectedItem.description}
+            </p>
+            <button
+              onClick={() => setSelectedItem(null)}
+              className="mt-6 rounded-full border border-border/40 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-foreground/70 transition-colors hover:bg-popover/20"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Controls */}
       <div className="flex items-center gap-4">

@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { LoaderOne } from "@/components/ui/loader";
 import { useRouter } from "next/navigation";
 import {
   GlassCard,
@@ -19,23 +18,17 @@ const ProfilePage = () => {
   const { data: uSession, isPending } = authClient.useSession();
   const router = useRouter();
 
-  if (isPending)
+  if (isPending) {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <Image src={loader} alt="Loading..." width={64} height={64} />
       </div>
     );
+  }
 
   if (!uSession) {
     router.push("/login");
   }
-
-  if (isPending)
-    return (
-      <div className="min-h-screen flex justify-center items-center">
-        <LoaderOne />
-      </div>
-    );
 
   return (
     <div className="max-w-4xl mx-auto p-8">

@@ -2,23 +2,33 @@ import { HeroAurora } from "@/components/01_homepage/hero";
 import GoruCarousel from "@/components/01_homepage/GoruCarousel";
 import { StatsCards } from "@/components/01_homepage/stats-cards";
 import AnimalProvider from "@/context/AnimalProvider";
+import { qTips } from "@/providers/api";
 
-export default function Home() {
-  const items = [
-    { id: "g1", title: "Goru 1", description: "Strong and healthy", tag: "Prime" },
-    { id: "g2", title: "Goru 2", description: "Young and fit", tag: "Young" },
-    { id: "g3", title: "Goru 3", description: "Well-fed", tag: "Available" },
-    { id: "g4", title: "Goru 4", description: "Young and fit", tag: "Young" },
-    { id: "g5", title: "Goru 5", description: "Well-fed", tag: "Available" },
-    { id: "g6", title: "Goru 6", description: "Well-fed", tag: "Available" },
-    { id: "g7", title: "Goru 7", description: "Well-fed", tag: "Available" },
-    { id: "g8", title: "Goru 8", description: "Well-fed", tag: "Available" },
-    { id: "g9", title: "Goru 9", description: "Well-fed", tag: "Available" },
-    ];
+export default async function Home() {
+  const tips = await qTips();
+  const priorityOrder = {
+    Essential: 0,
+    High: 1,
+    Recommended: 2,
+    Sunnah: 3,
+  };
+  const items = tips
+    .slice()
+    .sort(
+      (a, b) =>
+        (priorityOrder[a.priority] ?? 9) - (priorityOrder[b.priority] ?? 9),
+    )
+    .map((tip) => ({
+    id: String(tip.id ?? tip.title),
+    title: tip.title,
+    description: tip.description,
+    priority: tip.priority,
+    tags: [tip.category, tip.icon].filter(Boolean),
+    }));
   return (
     <div className="flex flex-col h-full flex-1 items-center justify-center gap-10 bg-background/50 py-10 px-25">
       <HeroAurora />
-      <GoruCarousel className="" items={items}/>
+      <GoruCarousel className="" items={items} />
       <AnimalProvider>
         <StatsCards />
       </AnimalProvider>

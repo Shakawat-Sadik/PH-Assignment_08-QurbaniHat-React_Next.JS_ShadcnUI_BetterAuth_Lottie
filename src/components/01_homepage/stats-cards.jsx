@@ -80,8 +80,8 @@ export function StatsCards({
   console.log(randNums);
 
   return loading ? (
-    <div className="p-10 text-center">
-      <Image src={loader} alt="Loading..." width={256} height={256} />
+    <div className="min-h-screen flex justify-center items-center">
+      <Image src={loader} alt="Loading..." width={64} height={64} />
     </div>
   ) : (
     <LazyMotion features={domAnimation}>
