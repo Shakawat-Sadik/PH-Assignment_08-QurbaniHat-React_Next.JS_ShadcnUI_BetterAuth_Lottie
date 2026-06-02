@@ -76,7 +76,7 @@ const SignInPage = () => {
     const data = await authClient.signIn.social(
       {
         provider: "google",
-        // callbackURL: "/",
+        callbackURL: "/",
       },
       {
         onRequest: () => {
@@ -85,7 +85,7 @@ const SignInPage = () => {
         },
         onSuccess: () => {
           setIsLoading(false);
-          router.push("/");
+          // router.push("/");
         },
         onError: (error) => {
           setIsLoading(false);

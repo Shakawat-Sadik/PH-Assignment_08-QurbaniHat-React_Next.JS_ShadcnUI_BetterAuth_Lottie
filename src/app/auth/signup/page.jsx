@@ -43,7 +43,7 @@ const SignUpPage = () => {
       const data = await authClient.signIn.social(
         {
           provider: "google",
-          // callbackURL: "/",
+          callbackURL: "/",
         },
         {
           onRequest: () => {
@@ -53,7 +53,7 @@ const SignUpPage = () => {
           onSuccess: () => {
             toast.success("Logged in successfully!", sonnerFunctionality);
             setIsLoading(false);
-            router.push("/");
+            // router.push("/");
           },
           onError: (error) => {
             setIsLoading(false);
