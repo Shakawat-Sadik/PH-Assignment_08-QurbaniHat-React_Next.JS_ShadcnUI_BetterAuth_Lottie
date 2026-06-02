@@ -47,7 +47,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 If deploying to Vercel, add the same variables in the project settings for Development, Preview, and Production.
 
-## Cloudinary Upload Guide (Merged)
+## Cloudinary Upload Guide
 
 This app uses signed Cloudinary uploads for user avatars on signup. The browser requests a signed payload from the server, then uploads directly to Cloudinary. The returned secure URL is stored in Better Auth.
 

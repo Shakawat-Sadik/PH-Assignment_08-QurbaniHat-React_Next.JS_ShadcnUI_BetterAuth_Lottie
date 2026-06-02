@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
       suppressHydrationWarning={true}
     >
       <body
-        className="min-h-full flex flex-col"
+        className="min-h-full flex flex-col overflow-x-hidden"
       >
         <ThemeProvider>
           <Navbar className="sticky top-0 w-full z-90" />

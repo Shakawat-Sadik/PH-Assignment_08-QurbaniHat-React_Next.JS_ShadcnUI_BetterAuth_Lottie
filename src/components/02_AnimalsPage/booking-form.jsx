@@ -68,10 +68,10 @@ const BookingForm = ({ animal }) => {
   };
 
   return isPending ? (
-      <div className="min-h-screen flex justify-center items-center w-full max-w-3xl mx-auto">
+      <div className="min-h-[40vh] flex justify-center items-center w-full">
         <Image src={loader} alt="Loading..." width={64} height={64} />
       </div>) : (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="w-full max-w-none sm:max-w-3xl mx-auto">
       <Toaster />
       <TextureCardStyled>
         <TextureCardHeader className="p-4">
@@ -85,7 +85,7 @@ const BookingForm = ({ animal }) => {
             </div>
           )}
           <form id="booking" onSubmit={handleSubmit} className="grid gap-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" name="name" value={form.name} onChange={handleChange} required />

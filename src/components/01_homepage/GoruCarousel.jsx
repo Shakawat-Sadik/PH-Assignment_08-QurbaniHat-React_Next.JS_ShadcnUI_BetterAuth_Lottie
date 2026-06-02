@@ -125,12 +125,12 @@ export default function GoruCarousel({
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       className={cn(
-        "p-6 relative flex flex-col items-center justify-center gap-8 outline-none",
+        "relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden p-4 outline-none sm:p-6",
         className,
       )}
     >
       {/* Circular track */}
-      <div className="relative h-70 w-full max-w-lg">
+      <div className="relative h-64 w-full max-w-sm sm:h-70 sm:max-w-lg">
         <AnimatePresence mode="popLayout">
           {items.map((item, i) => {
             const pos = getItemPosition(i, activeIndex, total);
@@ -163,7 +163,7 @@ export default function GoruCarousel({
                 aria-selected={isActive}
                 role="option"
                 className={cn(
-                  "absolute left-1/2 top-1/2 flex h-40 w-64 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start gap-3 rounded-2xl border border-border/30 bg-linear-to-b p-4 backdrop-blur-sm transition-shadow duration-300",
+                  "absolute left-1/2 top-1/2 flex h-32 w-56 -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-start gap-3 rounded-2xl border border-border/30 bg-linear-to-b p-4 backdrop-blur-sm transition-shadow duration-300 sm:h-40 sm:w-64",
                   priorityClasses(item.priority),
                   isActive
                     ? "shadow-[0_24px_70px_-18px_rgba(0,0,0,0.55)]"
@@ -194,7 +194,7 @@ export default function GoruCarousel({
                   <h3
                     className={cn(
                       "text-left font-semibold leading-tight transition-colors duration-300",
-                      isActive ? "text-foreground text-2xl" : "text-foreground/80 text-lg",
+                      isActive ? "text-foreground text-lg sm:text-2xl" : "text-foreground/80 text-base sm:text-lg",
                     )}
                   >
                     {item.title}
@@ -222,7 +222,7 @@ export default function GoruCarousel({
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
       >
-        <span className="text-5xl font-bold tracking-tight text-foreground">
+        <span className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           {String(activeIndex + 1).padStart(2, "0")}
         </span>
         <span className="mt-1 text-xs text-muted-foreground">
@@ -244,7 +244,7 @@ export default function GoruCarousel({
           />
           <div
             className={cn(
-              "relative z-10 w-full max-w-xl rounded-3xl border border-border/40 bg-linear-to-b p-6 shadow-2xl backdrop-blur-lg",
+              "relative z-10 w-full max-w-xl max-h-[85vh] overflow-y-auto rounded-3xl border border-border/40 bg-linear-to-b p-6 shadow-2xl backdrop-blur-lg",
               priorityClasses(selectedItem.priority),
             )}
             role="dialog"

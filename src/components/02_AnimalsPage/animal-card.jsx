@@ -87,7 +87,7 @@ export default function AnimalCard({ animals }) {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full flex-col items-center">
       <DropdownMenu className="relative">
         <DropdownMenuTrigger
           render={
@@ -158,7 +158,7 @@ export default function AnimalCard({ animals }) {
           </DropdownMenuContent>
         </DropdownMenuPositioner>
       </DropdownMenu>
-      <div className="grid grid-cols-[auto] sm:grid-cols-[auto_auto] md:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto] h-full p-4 gap-5">
+      <div className="grid w-full grid-cols-1 gap-4 px-2 py-4 sm:grid-cols-2 sm:gap-5 sm:px-4 lg:grid-cols-3 xl:grid-cols-4">
         {sortedAnimals.map(
           ({
             id,
@@ -180,8 +180,8 @@ export default function AnimalCard({ animals }) {
             category,
             healthStatus,
           }) => (
-            <div key={id} className=" h-full p-4 rounded-lg m-5">
-              <Card className="relative mx-auto w-full max-w-sm pt-0 overflow-hidden border-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div key={id} className="h-full w-full rounded-lg p-2 sm:p-4 m-2 sm:m-4">
+              <Card className="relative mx-auto w-full max-w-sm overflow-hidden border-0 pt-0 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <div className="relative">
                   <Image
                     src={image}
@@ -209,7 +209,7 @@ export default function AnimalCard({ animals }) {
                   <Button asChild>
                     <Link href={`/animals/${id}`}>
                       Details
-                      <ArrowRightIcon className="size-16" />
+                      <ArrowRightIcon className="size-4" />
                     </Link>
                   </Button>
                 </CardFooter>

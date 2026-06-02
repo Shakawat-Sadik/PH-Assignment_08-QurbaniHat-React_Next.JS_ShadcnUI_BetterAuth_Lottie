@@ -13,8 +13,8 @@ const outsiderFontBN = Anek_Bangla({ subsets: ["bangla", "latin"] }); //inside c
 
 export function StatsCards({
   className,
-  width = "w-70",
-  height = "h-84",
+  width = "w-[90vw] sm:w-70 md:w-80",
+  height = "h-72 sm:h-84",
   images = ["/images/models/1.png", "/images/models/2.png"],
 }) {
   const { showAnimals, loading } = React.useContext(AnimalContext);
@@ -119,7 +119,7 @@ export function StatsCards({
             className="object-cover -z-20"
           />
           <div className="flex justify-between items-center">
-              <h2 className="text-border text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
+              <h2 className="text-border text-3xl sm:text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
                 {new Intl.NumberFormat(localeFor(id)).format(price)}
               </h2>
               <Switch data-card-id={id} onClick={handleCardClick} defaultChecked>
@@ -139,11 +139,11 @@ export function StatsCards({
               </Switch>
           </div>
           <div className="bg-border/40 p-1 rounded-md">
-            <h4 className="font-bold text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
+            <h4 className="font-bold text-base sm:text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
               {name}
             </h4>
             <div className="w-full h-px bg-border my-2"></div>
-            <p className=" text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
+            <p className="text-xs sm:text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
               {description}
             </p>
           </div>
@@ -172,7 +172,7 @@ export function StatsCards({
             className="object-cover -z-20"
           />
           <div className="flex justify-between items-center">
-            <h2 className="text-border text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
+            <h2 className="text-border text-3xl sm:text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
               {(() => {
                 const id2 = randNums < 35 ? showAnimals?.[randNums+1]?.id : showAnimals?.[randNums-5]?.id;
                 const price2 = randNums < 35 ? showAnimals?.[randNums+1]?.price : showAnimals?.[randNums-5]?.price;
@@ -199,11 +199,11 @@ export function StatsCards({
             </Switch>
           </div>
           <div className="bg-border/40 p-1 rounded-md">
-            <h4 className="font-bold text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
+            <h4 className="font-bold text-base sm:text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
               { randNums < 35 ? showAnimals?.[randNums+1].name : showAnimals?.[randNums-5].name}
             </h4>
             <div className="w-full h-px bg-border my-2"></div>
-            <p className=" text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
+            <p className="text-xs sm:text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
               { randNums < 35 ? showAnimals?.[randNums+1].description : showAnimals?.[randNums-5].description}
             </p>
           </div>
@@ -231,7 +231,7 @@ export function StatsCards({
             className="object-cover -z-20"
           />
           <div className="flex justify-between items-center">
-            <h2 className="text-border text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
+            <h2 className="text-border text-3xl sm:text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
               {(() => {
                 const id3 = randNums < 35 ? showAnimals?.[randNums+2]?.id : showAnimals?.[randNums-15]?.id;
                 const price3 = randNums < 35 ? showAnimals?.[randNums+2]?.price : showAnimals?.[randNums-15]?.price;
@@ -258,11 +258,11 @@ export function StatsCards({
             </Switch>
           </div>
           <div className="bg-border/40 p-1 rounded-md">
-            <h4 className="font-bold text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
+            <h4 className="font-bold text-base sm:text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
               { randNums < 35 ? showAnimals?.[randNums+2].name : showAnimals?.[randNums-15].name}
             </h4>
             <div className="w-full h-px bg-border my-2"></div>
-            <p className=" text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
+            <p className="text-xs sm:text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
               { randNums < 35 ? showAnimals?.[randNums+2].description : showAnimals?.[randNums-15].description }
             </p>
           </div>
@@ -290,7 +290,7 @@ export function StatsCards({
             className="object-cover -z-20"
           />
           <div className="flex justify-between items-center">
-            <h2 className="text-border text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
+            <h2 className="text-border text-3xl sm:text-5xl font-semibold tracking-tighter text-shadow-lg text-shadow-foreground">
               {(() => {
                 const id4 = randNums < 35 ? showAnimals?.[randNums+3]?.id : showAnimals?.[randNums-10]?.id;
                 const price4 = randNums < 35 ? showAnimals?.[randNums+3]?.price : showAnimals?.[randNums-10]?.price;
@@ -317,11 +317,11 @@ export function StatsCards({
             </Switch>
           </div>
           <div className="bg-border/40 p-1 rounded-md">
-            <h4 className="font-bold text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
+            <h4 className="font-bold text-base sm:text-lg leading-tight tracking-tighter text-shadow-lg text-shadow-border/50">
               { randNums < 35 ? showAnimals?.[randNums+3].name : showAnimals?.[randNums-10].name}
             </h4>
             <div className="w-full h-px bg-border my-2"></div>
-            <p className=" text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
+            <p className="text-xs sm:text-sm leading-tight tracking-tight max-w-[90%] text-shadow-lg text-shadow-border">
               { randNums < 35 ? showAnimals?.[randNums+3].description : showAnimals?.[randNums-10].description }
             </p>
           </div>

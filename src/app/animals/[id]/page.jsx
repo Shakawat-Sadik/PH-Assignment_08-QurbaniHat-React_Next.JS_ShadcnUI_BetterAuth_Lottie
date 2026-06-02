@@ -37,8 +37,8 @@ const AnimalDetails = async ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="col-span-2">
+    <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-3 lg:px-8">
+      <div className="lg:col-span-2">
         <div className="rounded overflow-hidden shadow">
           {images && images.length > 0 ? (
             <Image
@@ -58,10 +58,10 @@ const AnimalDetails = async ({ params }) => {
           <h1 className="text-2xl font-bold">{name}</h1>
           <p className="text-sm text-muted">{breed} • {type} • {location}</p>
           <div className="mt-3">
-            <h2 className="text-xl font-semibold">Price: ৳{price.toLocaleString()}</h2>
+            <h2 className="text-xl sm:text-2xl font-semibold">Price: ৳{price.toLocaleString()}</h2>
           </div>
 
-          <div className="mt-4 prose max-w-none">
+          <div className="mt-4 prose max-w-none text-sm sm:text-base">
             <p>{description}</p>
             <ul>
               <li>Weight: {weight} {weightUnit || 'kg'}</li>
@@ -73,7 +73,7 @@ const AnimalDetails = async ({ params }) => {
         </div>
       </div>
 
-      <aside className="col-span-1">
+      <aside className="lg:col-span-1">
         <BookingForm animal={animal} />
       </aside>
     </div>

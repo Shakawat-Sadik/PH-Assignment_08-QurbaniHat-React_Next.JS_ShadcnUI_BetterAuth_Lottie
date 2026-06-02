@@ -15,9 +15,9 @@ const AnimalsPage = async () => {
   console.log(knownTypes);
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="grid grid-cols-[auto] sm:grid-cols-[auto_auto] md:grid-cols-[auto_auto_auto] lg:grid-cols-[auto_auto_auto_auto] h-full p-4 gap-5">
-        {<AnimalCard animals={animals} />}
+    <div className="flex w-full justify-center">
+      <div className="w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <AnimalCard animals={animals} />
       </div>
     </div>
   );

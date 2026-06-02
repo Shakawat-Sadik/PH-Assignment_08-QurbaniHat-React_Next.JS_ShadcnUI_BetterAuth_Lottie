@@ -44,14 +44,14 @@ export function HeroAurora() {
   ];
 
   return (
-    <div className="relative isolate overflow-hidden rounded-lg border border-primary/25 bg-primary/10 w-full h-[48vh] md:h-[60vh] shadow-[0 0 1.5rem 1rem rgba(154, 230, 0, 0.25)]">
+    <div className="relative isolate w-full overflow-hidden rounded-lg border border-primary/25 bg-primary/10 shadow-[0_0_1.5rem_1rem_rgba(154,230,0,0.25)] h-[52vh] sm:h-[56vh] lg:h-[60vh]">
       <section
         onMouseMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           x.set(e.clientX - r.left);
           y.set(e.clientY - r.top);
         }}
-        className="relative z-20 isolate rounded-lg border border-primary/25 bg-card/75 p-10 w-full h-[48vh] md:h-[60vh] "
+        className="relative z-20 isolate h-full w-full rounded-lg border border-primary/25 bg-card/75 p-6 sm:p-8 lg:p-10"
       >
         <div className="lf-aurora absolute inset-0 opacity-80" />
         <motion.div
@@ -59,22 +59,22 @@ export function HeroAurora() {
           style={{ backgroundImage: spotlight }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-col md:flex-row items-center h-full gap-8">
+        <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col items-center gap-6 md:flex-row md:gap-8">
           <div className="flex-1 text-center md:text-left inset-shadow-2xl shadow-accent">
             <p className="text-sm font-semibold uppercase tracking-widest text-foreground/70 text-shadow-lg text-shadow-card/50">
               Qurbani Hat
             </p>
-            <h1 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground text-shadow-lg text-shadow-card/50">
+            <h1 className="mt-3 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-foreground text-shadow-lg text-shadow-card/50">
               Find healthy livestock for Qurbani
             </h1>
-            <p className="mt-4 max-w-xl text-sm font-semibold text-foreground/80 text-shadow-lg text-shadow-card/50">
+            <p className="mt-4 max-w-xl text-base sm:text-sm lg:text-base font-semibold text-foreground/80 text-shadow-lg text-shadow-card/50">
               Browse trusted sellers, view full details, and place a booking —
               secure and simple. Explore cows, goats and more.
             </p>
 
-            <div className="mt-6 flex items-center justify-center md:justify-start gap-3">
+            <div className="mt-6 flex items-center justify-center gap-3 md:justify-start">
               <Link href="/animals" className="no-underline">
-                <Button variant="outline" size="lg" className="text-shadow-lg text-shadow-card/50 font-semibold">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto text-shadow-lg text-shadow-card/50 font-semibold">
                   Browse Animals
                 </Button>
               </Link>
@@ -89,7 +89,7 @@ export function HeroAurora() {
           </div> */}
         </div>
       </section>
-      <section className="absolute top-0 right-0 bg-gray-950/5 ring-1 ring-neutral-700/10 dark:bg-neutral-800">
+      <section className="absolute top-0 right-0 hidden bg-gray-950/5 ring-1 ring-neutral-700/10 dark:bg-neutral-800 lg:block">
         <ThreeDMarquee images={images} />
       </section>
     </div>
