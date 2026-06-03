@@ -17,7 +17,7 @@ export const signOutt = async (router) => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/signin");
+          router.push("/auth/signin");
         },
       },
     });
